@@ -1,9 +1,5 @@
 alias dotf='cd $HOME/.dotfiles'
 
-if [[ `uname` == 'Darwin' ]]; then
-    alias ls='ls -G'
-    export LSCOLORS=gxfxcxdxbxegedabagacad
-fi
 alias la='ls -a'
 alias ll='ls -l'
 alias l.='ls -d .*'
@@ -17,6 +13,10 @@ alias ..='cd ..'
 
 #alias vi='/usr/local/vim/bin/vim'
 alias vi='/usr/bin/vim'
-if [[ `uname` == 'Darwin' ]]; then
+
+if [[ "$OSTYPE" == darwin* ]]; then
+    alias ls='ls -G'
+    export LSCOLORS=gxfxcxdxbxegedabagacad
+
     alias vim='mvim'
 fi
