@@ -1,5 +1,4 @@
 alias dotf='cd $HOME/.dotfiles'
-alias mkdir='mkdir -p'
 
 if [[ `uname` == 'Darwin' ]]; then
     alias ls='ls -G'
@@ -12,6 +11,7 @@ alias lrt='ll -rt'
 alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
+alias mkdir='mkdir -p'
 
 alias ..='cd ..'
 
