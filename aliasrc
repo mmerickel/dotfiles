@@ -1,6 +1,6 @@
 alias dotf='cd $HOME/.dotfiles'
 
-if [[ "$OSTYPE" == darwin* ]]; then
+if [[ `uname` == 'Darwin' ]]; then
     alias ls='ls -G'
     export LSCOLORS=gxfxcxdxbxegedabagacad
 fi
