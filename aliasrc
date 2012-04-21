@@ -1,0 +1,22 @@
+alias dotf='cd $HOME/.dotfiles'
+alias mkdir='mkdir -p'
+
+if [[ `uname` == 'Darwin' ]]; then
+    alias ls='ls -G'
+    export LSCOLORS=gxfxcxdxbxegedabagacad
+fi
+alias la='ls -a'
+alias ll='ls -l'
+alias l.='ls -d .*'
+alias lrt='ll -rt'
+alias cp='cp -i'
+alias mv='mv -i'
+alias rm='rm -i'
+
+alias ..='cd ..'
+
+#alias vi='/usr/local/vim/bin/vim'
+alias vi='/usr/bin/vim'
+if [[ `uname` == 'Darwin' ]]; then
+    alias vim='mvim'
+fi
