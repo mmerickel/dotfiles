@@ -4,6 +4,8 @@
 --type-add=css=.sass,.less,.scss
 --type-set=markdown=.markdown,.md
 --type-set=cucumber=.feature
+--type-set=rst=.rst
+--type-set=tmpl=.ini_tmpl,.py_tmpl,in_tmpl,.rst_tmpl
 --ignore-dir=vendor
 --ignore-dir=log
 --ignore-dir=tmp
@@ -11,8 +13,11 @@
 --ignore-dir=coverage
 --ignore-dir=public/assets
 --ignore-dir=public/coffeescripts
+--ignore-dir=env*
+--ignore-dir=*.egg-info
 --sort-files
 --color
 --follow
 --group
 --context=3
+--pager=less -R
