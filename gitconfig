@@ -1,0 +1,36 @@
+[include]
+    path = .gitconfig.inc
+[core]
+    excludesfile = .gitignore
+    editor = vi
+    autocrlf = false
+[branch]
+    autosetuprebase = always
+[push]
+    default = tracking
+[color]
+    diff = auto
+    status = auto
+    branch = auto
+    interactive = auto
+    ui = auto
+[alias]
+    st = status
+    ci = commit
+    co = checkout
+    br = branch
+    f = fetch --verbose
+    stage = add
+    unstage = reset HEAD
+    lol = log --pretty=oneline --abbrev-commit --graph --decorate
+    plog = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+[merge]
+    tool = threesome
+[mergetool "threesome"]
+    cmd = "vim -f $BASE $LOCAL $REMOTE $MERGED -c 'ThreesomeInit'"
+    trustExitCode = true
+[difftool "sourcetree"]
+    cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+[mergetool "sourcetree"]
+    cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+    trustExitCode = true
