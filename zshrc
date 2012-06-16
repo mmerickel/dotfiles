@@ -14,11 +14,12 @@ fi
 source $ZSH/oh-my-zsh.sh
 
 path=(/usr/local/bin $path)
-path=($HOME/.pyenv27/bin $path)
 
 if [[ "$OSTYPE" == darwin* ]]; then
     path=(/Library/Frameworks/Python.framework/Versions/2.7/bin $path)
 fi
+
+path=($HOME/.pyenv27/bin $path)
 
 source $HOME/.aliasrc
 source $HOME/.zshrc.local
