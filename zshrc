@@ -14,3 +14,4 @@ fi
 source $ZSH/oh-my-zsh.sh
 
 source $HOME/.aliasrc
+source $HOME/.zshrc.local

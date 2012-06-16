@@ -1,13 +1,12 @@
---type-add=ruby=.haml,.rake,.ru,.palette
+--type-add=css=.sass,.less,.scss
 --type-add=html=.html.erb,.html.haml,.mustache,.jst,.ejs
 --type-add=js=.js.erb,.coffee,.json
---type-add=css=.sass,.less,.scss
+--type-add=ruby=.haml,.rake,.ru,.palette
 --type-add=vim=.vimrc
---type-add=rst=.rst
---type-add=matlab=.m
 
---type-set=markdown=.markdown,.md,.mkd
 --type-set=cucumber=.feature
+--type-set=markdown=.markdown,.md,.mkd
+--type-set=matlab=.m
 --type-set=rst=.rst
 --type-set=tmpl=.ini_tmpl,.py_tmpl,in_tmpl,.rst_tmpl
 
@@ -18,8 +17,9 @@
 --ignore-dir=coverage
 --ignore-dir=public/assets
 --ignore-dir=public/coffeescripts
---ignore-dir=env*
+--ignore-dir=env
 --ignore-dir=*.egg-info
+--ignore-dir=.tox
 
 --sort-files
 --color
