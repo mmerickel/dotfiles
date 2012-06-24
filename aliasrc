@@ -14,6 +14,8 @@ alias ..='cd ..'
 #alias vi='/usr/local/vim/bin/vim'
 alias vi='/usr/bin/vim'
 
+alias g='git'
+
 if [[ "$OSTYPE" == darwin* ]]; then
     alias ls='ls -G'
     export LSCOLORS=gxfxcxdxbxegedabagacad

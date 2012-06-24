@@ -1,17 +1,48 @@
-ZSH=$HOME/.oh-my-zsh
-ZSH_THEME="nicoulaj"
-#ZSH_THEME="random"
-DISABLE_AUTO_UPDATE="true"
-# DISABLE_AUTO_TITLE="true"
-COMPLETION_WAITING_DOTS="true"
+# Set the key mapping style to 'emacs' or 'vi'.
+zstyle ':omz:module:editor' keymap 'vi'
 
-plugins=(history-substring-search zsh-syntax-highlighting git python mercurial svn)
+# Indicate the editor is completing
+zstyle ':omz:module:editor' completing '...'
 
-if [[ "$OSTYPE" == darwin* ]]; then
-    plugins=(osx $plugins)
-fi
+# Auto convert .... to ../..
+zstyle ':omz:module:editor' dot-expansion 'no'
 
-source $ZSH/oh-my-zsh.sh
+# Set case-sensitivity for completion, history lookup, etc.
+zstyle ':omz:*:*' case-sensitive 'no'
+
+# Color output (auto set to 'no' on dumb terminals).
+zstyle ':omz:*:*' color 'yes'
+
+# Auto set the tab and window titles.
+zstyle ':omz:module:terminal' auto-title 'yes'
+
+# Set the Zsh modules to load (man zshmodules).
+# zstyle ':omz:load' zmodule 'attr' 'stat'
+
+# Set the Zsh functions to load (man zshcontrib).
+# zstyle ':omz:load' zfunction 'zargs' 'zmv'
+
+# Set the Oh My Zsh modules to load (browse modules).
+# The order matters.
+zstyle ':omz:load' omodule \
+  'environment' \
+  'terminal' \
+  'editor' \
+  'history' \
+  'directory' \
+  'spectrum' \
+  'utility' \
+  'completion' \
+  'osx' \
+  'prompt'
+
+# Set the prompt theme to load.
+# Setting it to 'random' loads a random theme.
+# Auto set to 'off' on dumb terminals.
+zstyle ':omz:module:prompt' theme 'nicoulaj'
+
+# This will make you shout: OH MY ZSHELL!
+source "$OMZ/init.zsh"
 
 path=(/usr/local/bin $path)
 
@@ -21,5 +52,5 @@ fi
 
 path=($HOME/.pyenv27/bin $path)
 
-source $HOME/.aliasrc
-source $HOME/.zshrc.local
+source "$HOME/.aliasrc"
+source "$HOME/.zshrc.local"
