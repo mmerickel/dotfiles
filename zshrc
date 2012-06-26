@@ -53,4 +53,4 @@ fi
 path=($HOME/.pyenv27/bin $path)
 
 source "$HOME/.aliasrc"
-source "$HOME/.zshrc.local"
+[[ -a "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
