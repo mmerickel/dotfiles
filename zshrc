@@ -1,7 +1,13 @@
 # Set the key mapping style to 'emacs' or 'vi'.
 zstyle ':omz:module:editor' keymap 'vi'
 
-# Indicate the editor is completing
+# Indicate the editor is not in insert mode.
+#zstyle ':omz:module:editor:keymap' primary '>>>'
+#zstyle ':omz:module:editor:keymap:primary' insert 'I'
+#zstyle ':omz:module:editor:keymap:primary' overwrite 'O'
+#zstyle ':omz:module:editor:keymap' alternate '<<<'
+
+# Indicate the editor is completing.
 zstyle ':omz:module:editor' completing '...'
 
 # Auto convert .... to ../..
