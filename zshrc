@@ -1,5 +1,5 @@
 # Set the key mapping style to 'emacs' or 'vi'.
-zstyle ':omz:module:editor' keymap 'vi'
+zstyle ':omz:module:editor' keymap 'emacs'
 
 # Indicate the editor is not in insert mode.
 #zstyle ':omz:module:editor:keymap' primary '>>>'
