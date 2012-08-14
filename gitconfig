@@ -1,7 +1,7 @@
 [include]
     path = .gitconfig.inc
 [core]
-    excludesfile = .gitignore
+    excludesfile = ~/.gitignore
     editor = vi
     autocrlf = false
 [branch]
