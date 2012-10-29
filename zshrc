@@ -41,22 +41,25 @@ zstyle ':omz:load' omodule \
   'completion' \
   'osx' \
   'prompt'
+#
+# Executes commands at the start of an interactive session.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
 
-# Set the prompt theme to load.
-# Setting it to 'random' loads a random theme.
-# Auto set to 'off' on dumb terminals.
-zstyle ':omz:module:prompt' theme 'nicoulaj'
-
-# This will make you shout: OH MY ZSHELL!
-source "$OMZ/init.zsh"
-
-path=(/usr/local/bin $path)
-
-if [[ "$OSTYPE" == darwin* ]]; then
-    path=(/Library/Frameworks/Python.framework/Versions/2.7/bin $path)
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
+path=(/usr/local/bin $path)
 path=($HOME/.pyenv27/bin $path)
 
-source "$HOME/.aliasrc"
-[[ -a "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
+if [[ -a "${ZDOTDIR:-$HOME}/.aliasrc" ]]; then
+    source "${ZDOTDIR:-$HOME}/.aliasrc"
+fi
+
+if [[ -a "${ZDOTDIR:-$HOME}/.zshrc.local" ]]; then
+    source "${ZDOTDIR:-$HOME}/.zshrc.local"
+fi
