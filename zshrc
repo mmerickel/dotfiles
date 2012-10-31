@@ -10,8 +10,15 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-path=(/usr/local/bin $path)
-path=($HOME/.pyenv27/bin $path)
+if [[ "$OSTYPE" == darwin* ]]; then
+    path=(/Library/Frameworks/Python.framework/Versions/2.7/bin $path)
+fi
+
+path=(
+    $HOME/.pyenv27/bin
+    /usr/local/bin
+    $path
+)
 
 if [[ -a "${ZDOTDIR:-$HOME}/.aliasrc" ]]; then
     source "${ZDOTDIR:-$HOME}/.aliasrc"
