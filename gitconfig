@@ -21,6 +21,7 @@
     co = checkout
     br = branch
     f = fetch --verbose
+    up = remote --verbose update
     stage = add
     unstage = reset HEAD
     lol = log --pretty=oneline --abbrev-commit --graph --decorate
