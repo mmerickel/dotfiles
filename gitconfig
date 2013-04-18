@@ -3,7 +3,7 @@
 [core]
     excludesfile = ~/.gitignore
     editor = vi
-    autocrlf = false
+    autocrlf = input
 [branch]
     autosetuprebase = always
 [push]
