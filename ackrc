@@ -11,6 +11,7 @@
 --type-set=tmpl=.ini_tmpl,.py_tmpl,in_tmpl,.rst_tmpl
 --type-set=mako=.mak,.mako,.mako.html
 --type-set=jinja2=.jinja2,.jt,.jinja2.html
+--type-set=plist=.plist
 
 --ignore-dir=vendor
 --ignore-dir=log
