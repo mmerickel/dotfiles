@@ -16,6 +16,10 @@ alias vi='/usr/bin/vim'
 
 alias g='git'
 
+if [[ -f "/usr/local/bin/vim" ]]; then
+    alias vi='/usr/local/bin/vim'
+fi
+
 if [[ "$OSTYPE" == darwin* ]]; then
     alias ls='ls -G'
     export LSCOLORS=gxfxcxdxbxegedabagacad
