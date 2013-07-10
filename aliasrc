@@ -11,18 +11,17 @@ alias mkdir='mkdir -p'
 
 alias ..='cd ..'
 
-#alias vi='/usr/local/vim/bin/vim'
-alias vi='/usr/bin/vim'
-
 alias g='git'
-
-if [[ -f "/usr/local/bin/vim" ]]; then
-    alias vi='/usr/local/bin/vim'
-fi
 
 if [[ "$OSTYPE" == darwin* ]]; then
     alias ls='ls -G'
     export LSCOLORS=gxfxcxdxbxegedabagacad
 
-    alias vim='mvim'
+    if [[ -f "/usr/local/bin/mvim" ]]; then
+        alias vim='mvim'
+    fi
+
+    if [[ -f "/Applications/MacVim.app/Contents/MacOS/Vim" ]]; then
+        alias vi='/Applications/MacVim.app/Contents/MacOS/Vim'
+    fi
 fi

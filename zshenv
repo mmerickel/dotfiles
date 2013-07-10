@@ -17,13 +17,12 @@ fi
 # Editors
 #
 
-if [[ -f "/usr/local/bin/vim" ]]; then
-    export EDITOR='/usr/local/bin/vim'
-    export VISUAL='/usr/local/bin/vim'
+if [[ -f "/Applications/MacVim.app/Contents/MacOS/Vim" ]]; then
+    export EDITOR='/Applications/MacVim.app/Contents/MacOS/Vim'
 else
     export EDITOR='vi'
-    export VISUAL='vi'
 fi
+export VISUAL=$EDITOR
 export PAGER='less'
 
 #
