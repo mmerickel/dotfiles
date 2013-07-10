@@ -17,8 +17,13 @@ fi
 # Editors
 #
 
-export EDITOR='vi'
-export VISUAL='vi'
+if [[ -f "/usr/local/bin/vim" ]]; then
+    export EDITOR='/usr/local/bin/vim'
+    export VISUAL='/usr/local/bin/vim'
+else
+    export EDITOR='vi'
+    export VISUAL='vi'
+fi
 export PAGER='less'
 
 #
