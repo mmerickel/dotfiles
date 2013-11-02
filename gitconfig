@@ -6,7 +6,7 @@
 [branch]
     autosetuprebase = always
 [push]
-    default = current
+    default = upstream
 [color]
     diff = auto
     status = auto
