@@ -10,10 +10,6 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-if [[ "$OSTYPE" == darwin* ]]; then
-    path=(/Library/Frameworks/Python.framework/Versions/2.7/bin $path)
-fi
-
 path=(
     $HOME/.pyenv27/bin
     /usr/local/bin
