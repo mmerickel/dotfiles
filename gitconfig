@@ -3,6 +3,8 @@
 [core]
     excludesfile = ~/.gitignore
     autocrlf = input
+[init]
+    templatedir = ~/.git-templates
 [branch]
     autosetuprebase = always
 [push]
