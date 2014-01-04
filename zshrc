@@ -11,8 +11,6 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 path=(
-    $HOME/.pyenv33/bin
-    $HOME/.pyenv27/bin
     /usr/local/bin
     $path
 )
