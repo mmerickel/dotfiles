@@ -38,3 +38,5 @@
     trustExitCode = true
 [merge]
 	conflictstyle = diff3
+[pull]
+	rebase = preserve
