@@ -22,7 +22,7 @@
     co = checkout
     br = branch
     f = fetch --verbose
-    up = remote update --prune
+    up = "!git remote update --prune; git merge --ff-only @{u}"
     stage = add
     unstage = reset HEAD
     lol = log --pretty=oneline --abbrev-commit --graph --decorate
