@@ -12,6 +12,7 @@
 --type-set=mako=.mak,.mako,.mako.html
 --type-set=jinja2=.jinja2,.jt,.jinja2.html
 --type-set=plist=.plist
+--type-set=go=.go
 
 --ignore-dir=vendor
 --ignore-dir=log
