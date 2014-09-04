@@ -11,6 +11,7 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 path=(
+    "$HOME/.bin"
     /usr/local/bin
     $path
 )
