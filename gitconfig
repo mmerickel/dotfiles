@@ -21,7 +21,7 @@
     ci = commit
     co = checkout
     br = branch
-    f = fetch --verbose
+    f = fetch --verbose --prune
     up = "!git remote update --prune; git merge --ff-only @{u}"
     stage = add
     unstage = reset HEAD
