@@ -4,6 +4,9 @@
 --type-add=ruby=.haml,.rake,.ru,.palette
 --type-add=vim=.vimrc
 
+--type-add=ini=.ini
+--type-add=conf=.conf,.ini,.cfg
+
 --type-set=cucumber=.feature
 --type-set=markdown=.markdown,.md,.mkd
 --type-set=matlab=.m
