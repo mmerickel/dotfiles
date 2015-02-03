@@ -5,7 +5,7 @@
 [init]
     templatedir = ~/.git-templates
 [branch]
-    autosetuprebase = always
+    autosetuprebase = local
 [push]
     default = simple
 [color]
@@ -37,5 +37,3 @@
     trustExitCode = true
 [merge]
     conflictstyle = diff3
-[pull]
-    rebase = preserve
