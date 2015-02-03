@@ -1,7 +1,6 @@
 [include]
     path = .gitconfig.inc
 [core]
-    excludesfile = ~/.gitignore
     autocrlf = input
 [init]
     templatedir = ~/.git-templates
@@ -37,6 +36,6 @@
     cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
     trustExitCode = true
 [merge]
-	conflictstyle = diff3
+    conflictstyle = diff3
 [pull]
-	rebase = preserve
+    rebase = preserve
