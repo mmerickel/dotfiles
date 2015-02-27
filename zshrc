@@ -12,6 +12,7 @@ fi
 
 path=(
     "$HOME/.bin"
+    "$HOME/.local/bin"
     /usr/local/bin
     $path
 )
