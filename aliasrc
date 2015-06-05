@@ -16,12 +16,4 @@ alias g='git'
 if [[ "$OSTYPE" == darwin* ]]; then
     alias ls='ls -G'
     export LSCOLORS=gxfxcxdxbxegedabagacad
-
-    if [[ -f "/usr/local/bin/mvim" ]]; then
-        alias vim='mvim'
-    fi
-
-    if [[ -f "/Applications/MacVim.app/Contents/MacOS/Vim" ]]; then
-        alias vi='/Applications/MacVim.app/Contents/MacOS/Vim'
-    fi
 fi
