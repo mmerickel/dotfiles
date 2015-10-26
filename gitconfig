@@ -2,10 +2,13 @@
     path = .gitconfig.inc
 [core]
     autocrlf = input
+    ignorecase = false
 [init]
     templatedir = ~/.git-templates
 [branch]
     autosetuprebase = local
+[rebase]
+    autostash = true
 [push]
     default = simple
 [color]
