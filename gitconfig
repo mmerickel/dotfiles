@@ -30,6 +30,7 @@
     lol = log --pretty=oneline --abbrev-commit --graph --decorate
     plog = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
     pullall = "!f(){ git pull \"$@\" && git submodule update --init --recursive && git submodule foreach 'git checkout master; git rebase origin/master'; }; f"
+    sync = "!f(){ git submodule foreach -q --recursive 'branch=\"$(git config -f $toplevel/.gitmodules submodule.$name.branch)\"; [ \"$branch\" = \"\" ] || git checkout $branch'; }; f"
 [mergetool "splice-osx"]
     cmd = "mvim -f $BASE $LOCAL $REMOTE $MERGED -c 'SpliceInit'"
     trustExitCode = true
@@ -41,6 +42,6 @@
 [merge]
     conflictstyle = diff3
 [filter "lfs"]
-	clean = git-lfs clean %f
-	smudge = git-lfs smudge %f
-	required = true
+    clean = git-lfs clean %f
+    smudge = git-lfs smudge %f
+    required = true
