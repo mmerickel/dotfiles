@@ -36,7 +36,9 @@ zstyle ':prezto:load' pmodule \
   'prompt' \
   'archive' \
   'osx' \
-  'node'
+  'node' \
+  'rsync' \
+  'tmux'
 
 #
 # Autosuggestions
@@ -166,4 +168,4 @@ zstyle ':prezto:module:terminal' auto-title 'yes'
 # zstyle ':prezto:module:tmux:auto-start' remote 'yes'
 
 # Integrate with iTerm2.
-# zstyle ':prezto:module:tmux:iterm' integrate 'yes'
+zstyle ':prezto:module:tmux:iterm' integrate 'yes'
