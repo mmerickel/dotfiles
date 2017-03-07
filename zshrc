@@ -26,3 +26,17 @@ fi
 if [[ -a "${ZDOTDIR:-$HOME}/.zshrc.local" ]]; then
     source "${ZDOTDIR:-$HOME}/.zshrc.local"
 fi
+
+function tox {
+    PYENV=$(type -p pyenv)
+
+    if [ -z $TOX_PATH -a ! -z $PYENV ]; then
+        for pyv in $(pyenv versions --bare); do
+            TOX_PATH="$TOX_PATH:$(pyenv prefix $pyv)/bin"
+        done
+    fi
+
+    export TOX_PATH=$TOX_PATH
+
+    env PATH=$TOX_PATH:$PATH tox $@
+}
