@@ -17,3 +17,7 @@ if [[ "$OSTYPE" == darwin* ]]; then
     alias ls='ls -G'
     export LSCOLORS=gxfxcxdxbxegedabagacad
 fi
+
+if [[ -x $(command -v tmuxinator) ]]; then
+    alias mux='tmuxinator'
+fi
