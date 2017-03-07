@@ -32,9 +32,7 @@ if [[ -a "${ZDOTDIR:-$HOME}/.zshrc.local" ]]; then
 fi
 
 function tox {
-    PYENV=$(type -p pyenv)
-
-    if [ -z $TOX_PATH -a ! -z $PYENV ]; then
+    if [[ -z "$TOX_PATH" && $(type -p pyenv) ]]; then
         for pyv in $(pyenv versions --bare); do
             TOX_PATH="$TOX_PATH:$(pyenv prefix $pyv)/bin"
         done
