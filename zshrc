@@ -5,7 +5,11 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-fpath+=$HOME/.zfunc
+fpath=(
+    $HOME/.zfunc
+    /usr/local/share/zsh-completions
+    $fpath
+)
 
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
@@ -15,7 +19,7 @@ fi
 path=(
     "$HOME/.bin"
     "$HOME/.local/bin"
-    /usr/local/bin
+    /usr/local/{bin,sbin}
     $path
 )
 
