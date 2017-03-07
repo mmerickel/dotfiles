@@ -32,6 +32,7 @@
     pullall = "!f(){ git pull \"$@\" && git submodule update --init --recursive && git submodule foreach 'git checkout master; git rebase origin/master'; }; f"
     sync = "!f(){ git submodule foreach -q --recursive 'branch=\"$(git config -f $toplevel/.gitmodules submodule.$name.branch)\"; [ \"$branch\" = \"\" ] || git checkout $branch'; }; f"
     pushf = push --force-with-lease
+    conflicts = diff --name-only --diff-filter=U
 [mergetool "splice-osx"]
     cmd = "mvim -f $BASE $LOCAL $REMOTE $MERGED -c 'SpliceInit'"
     trustExitCode = true
@@ -46,3 +47,8 @@
     clean = git-lfs clean -- %f
     smudge = git-lfs smudge -- %f
     required = true
+[mergetool "diffmerge"]
+	cmd = /usr/local/bin/diffmerge --merge --result=\"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
+    trustExitCode = true
+[difftool "diffmerge"]
+	cmd = /usr/local/bin/diffmerge \"$LOCAL\" \"$REMOTE\"
