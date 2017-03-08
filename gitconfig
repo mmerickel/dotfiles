@@ -43,6 +43,7 @@
     trustExitCode = true
 [merge]
     conflictstyle = diff3
+	renamelimit = 999999
 [filter "lfs"]
     clean = git-lfs clean -- %f
     smudge = git-lfs smudge -- %f
@@ -52,3 +53,5 @@
     trustExitCode = true
 [difftool "diffmerge"]
 	cmd = /usr/local/bin/diffmerge \"$LOCAL\" \"$REMOTE\"
+[diff]
+	renamelimit = 999999
