@@ -10,3 +10,8 @@
     zcompile "$zcompdump"
   fi
 } &!
+
+# Local config
+if [[ -a "${ZDOTDIR:-$HOME}/.zlogin.local" ]]; then
+    source "${ZDOTDIR:-$HOME}/.zlogin.local"
+fi

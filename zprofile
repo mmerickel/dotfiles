@@ -44,3 +44,8 @@ fi
 
 # Temporary Files
 TMPPREFIX="$(mktemp -d)/zsh"
+
+# Local config
+if [[ -a "${ZDOTDIR:-$HOME}/.zprofile.local" ]]; then
+    source "${ZDOTDIR:-$HOME}/.zprofile.local"
+fi

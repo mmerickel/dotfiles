@@ -35,6 +35,7 @@ zstyle ':prezto:load' pmodule \
   'osx' \
   'rsync' \
   'tmux' \
+  'python' \
   'node' \
   'ruby'
 
