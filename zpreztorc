@@ -34,10 +34,7 @@ zstyle ':prezto:load' pmodule \
   'archive' \
   'osx' \
   'rsync' \
-  'tmux' \
-  'python' \
-  'node' \
-  'ruby'
+  'tmux'
 
 #
 # Autosuggestions
