@@ -4,3 +4,15 @@ sandbox_init_nvm() {
 
 sandbox_hook nvm node
 sandbox_hook nvm npm
+
+sandbox_init_rvm() {
+    source $rvm_path/scripts/rvm
+}
+
+sandbox_hook rvm gem
+sandbox_hook rvm irb
+sandbox_hook rvm ruby
+sandbox_hook rvm bundle
+
+sandbox_hook rvm pod
+sandbox_hook rvm tmuxinator
