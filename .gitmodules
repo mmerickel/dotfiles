@@ -6,3 +6,6 @@
 	path = zprezto
 	url = https://github.com/zsh-users/prezto.git
 	branch = master
+[submodule "sandboxd"]
+	path = sandboxd
+	url = https://github.com/benvan/sandboxd.git

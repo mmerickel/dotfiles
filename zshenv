@@ -2,6 +2,10 @@
 # Defines environment variables.
 #
 
+export PYENV_ROOT=$HOME/.pyenv
+export NVM_DIR=$HOME/.nvm
+export rvm_path=$HOME/.rvm
+
 # Local config
 if [[ -a "${ZDOTDIR:-$HOME}/.zshenv.local" ]]; then
     source "${ZDOTDIR:-$HOME}/.zshenv.local"

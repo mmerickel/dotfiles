@@ -1,0 +1,6 @@
+sandbox_init_nvm() {
+    source $(brew --prefix nvm)/nvm.sh
+}
+
+sandbox_hook nvm node
+sandbox_hook nvm npm

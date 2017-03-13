@@ -27,18 +27,10 @@ if [[ -a "${ZDOTDIR:-$HOME}/.aliasrc" ]]; then
     source "${ZDOTDIR:-$HOME}/.aliasrc"
 fi
 
-# Functions
-function tox {
-    if [[ -z "$TOX_PATH" && -x $(command -v pyenv) ]]; then
-        for pyv in $(pyenv versions --bare); do
-            TOX_PATH="$TOX_PATH:$(pyenv prefix $pyv)/bin"
-        done
-    fi
-
-    export TOX_PATH=$TOX_PATH
-
-    env PATH=$TOX_PATH:$PATH tox $@
-}
+# Sandbox commands
+if [[ -a "${ZDOTDIR:-$HOME}/.sandboxd" ]]; then
+    source "${ZDOTDIR:-$HOME}/.sandboxd"
+fi
 
 # Local config
 if [[ -a "${ZDOTDIR:-$HOME}/.zshrc.local" ]]; then
