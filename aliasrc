@@ -12,7 +12,7 @@ alias mkdir='mkdir -p'
 alias ..='cd ..'
 
 alias g='git'
-alias mux=tmuxinator
+alias mux='tmuxinator'
 
 if [[ "$OSTYPE" == darwin* ]]; then
     alias ls='ls -G'
@@ -28,5 +28,5 @@ tox() {
 
     export TOX_PATH=$TOX_PATH
 
-    PATH=$TOX_PATH:$PATH tox $@
+    env PATH=$TOX_PATH:$PATH tox $@
 }
