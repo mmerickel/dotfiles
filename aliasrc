@@ -19,6 +19,11 @@ if [[ "$OSTYPE" == darwin* ]]; then
     export LSCOLORS=gxfxcxdxbxegedabagacad
 fi
 
+if [[ -f "/Applications/MacVim.app/Contents/MacOS/Vim" ]]; then
+    alias vim='/Applications/MacVim.app/Contents/MacOS/Vim'
+    alias vi='vim'
+fi
+
 tox() {
     if [[ -z "$TOX_PATH" && -x $(command -v pyenv) ]]; then
         for pyv in $(pyenv versions --bare); do
