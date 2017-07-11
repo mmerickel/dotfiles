@@ -4,7 +4,7 @@
 	branch = master
 [submodule "zprezto"]
 	path = zprezto
-	url = https://github.com/zsh-users/prezto.git
+    url = https://github.com/sorin-ionescu/prezto.git
 	branch = master
 [submodule "sandboxd"]
 	path = sandboxd
