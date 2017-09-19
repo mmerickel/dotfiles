@@ -22,9 +22,6 @@ path=(
     $path
 )
 
-bindkey '^R' history-incremental-search-backward
-bindkey '^S' history-incremental-search-forward
-
 # Aliases
 if [[ -a "${ZDOTDIR:-$HOME}/.aliasrc" ]]; then
     source "${ZDOTDIR:-$HOME}/.aliasrc"
