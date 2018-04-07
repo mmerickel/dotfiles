@@ -12,6 +12,7 @@ alias mkdir='mkdir -p'
 alias ..='cd ..'
 
 alias g='git'
+alias k='kubectl'
 alias mux='tmuxinator'
 
 if [[ "$OSTYPE" == darwin* ]]; then
