@@ -15,6 +15,7 @@ zsh:
 	$(LN) $(DOTFILES)/zlogout $(HOME)/.zlogout
 	$(LN) $(DOTFILES)/sandboxd/sandboxd $(HOME)/.sandboxd
 	$(LN) $(DOTFILES)/sandboxrc $(HOME)/.sandboxrc
+	$(LN) $(DOTFILES)/gemrc $(HOME)/.gemrc
 
 tmux:
 	$(LN) $(DOTFILES)/tmux.conf $(HOME)/.tmux.conf
