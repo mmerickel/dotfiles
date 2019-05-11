@@ -7,6 +7,9 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
+# do not require >! and >>!
+setopt CLOBBER
+
 # Completion Paths
 fpath=(
     $HOME/.zfunc
