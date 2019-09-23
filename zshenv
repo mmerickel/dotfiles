@@ -8,6 +8,10 @@ export PYENV_ROOT=$HOME/.pyenv
 export NVM_DIR=$HOME/.nvm
 export rvm_path=$HOME/.rvm
 
+if [[ -a "$HOME/.local/cacerts.pem" ]]; then
+    export REQUESTS_CA_BUNDLE=$HOME/.local/cacerts.pem
+fi
+
 # Local config
 if [[ -a "${ZDOTDIR:-$HOME}/.zshenv.local" ]]; then
     source "${ZDOTDIR:-$HOME}/.zshenv.local"
