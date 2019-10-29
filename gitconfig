@@ -40,10 +40,6 @@
     sync = "!f(){ git submodule foreach -q --recursive 'branch=\"$(git config -f $toplevel/.gitmodules submodule.$name.branch)\"; [ \"$branch\" = \"\" ] || git checkout $branch'; }; f"
     pushf = push --force-with-lease
     conflicts = diff --name-only --diff-filter=U
-[filter "lfs"]
-    clean = git-lfs clean -- %f
-    smudge = git-lfs smudge -- %f
-    required = true
 [mergetool "diffmerge"]
     cmd = /usr/local/bin/diffmerge --merge --result=\"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
     trustExitCode = true
@@ -57,3 +53,8 @@
     cmd = /usr/local/bin/diffmerge \"$LOCAL\" \"$REMOTE\"
 [difftool "sourcetree"]
     cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
