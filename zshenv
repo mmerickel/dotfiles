@@ -8,6 +8,8 @@ export PYENV_ROOT=$HOME/.pyenv
 export NVM_DIR=$HOME/.nvm
 export rvm_path=$HOME/.rvm
 
+export HOMEBREW_NO_ANALYTICS=1
+
 if [[ -a "$HOME/.local/cacerts.pem" ]]; then
     export REQUESTS_CA_BUNDLE=$HOME/.local/cacerts.pem
 fi
