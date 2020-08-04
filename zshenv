@@ -8,6 +8,8 @@ export PYENV_ROOT=$HOME/.pyenv
 export NVM_DIR=$HOME/.nvm
 export rvm_path=$HOME/.rvm
 
+export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
+
 export HOMEBREW_NO_ANALYTICS=1
 
 if [[ -a "$HOME/.local/cacerts.pem" ]]; then

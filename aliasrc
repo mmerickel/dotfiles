@@ -14,6 +14,7 @@ alias ..='cd ..'
 alias g='git'
 alias k='kubectl'
 alias mux='tmuxinator'
+alias tf='terraform'
 
 if [[ "$OSTYPE" == darwin* ]]; then
     alias ls='ls -G'

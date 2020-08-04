@@ -17,6 +17,8 @@ zsh:
 	$(LN) $(DOTFILES)/sandboxrc $(HOME)/.sandboxrc
 	$(LN) $(DOTFILES)/gemrc $(HOME)/.gemrc
 	$(LN) $(DOTFILES)/rvmrc $(HOME)/.rvmrc
+	$(LN) $(DOTFILES)/ripgreprc $(HOME)/.ripgreprc
+	$(LN) $(DOTFILES)/rgignore $(HOME)/.rgignore
 
 tmux:
 	$(LN) $(DOTFILES)/tmux.conf $(HOME)/.tmux.conf
