@@ -18,4 +18,3 @@ sandbox_hook rvm bundle
 
 sandbox_hook rvm fastlane
 sandbox_hook rvm pod
-sandbox_hook rvm tmuxinator
