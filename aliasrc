@@ -37,3 +37,21 @@ tox() {
 
     env PATH=$TOX_PATH:$PATH tox $@
 }
+
+aws-profile () {
+  # USAGE:
+  # aws-profile              <- print out current value
+  # aws-profile PROFILE_NAME <- set PROFILE_NAME active
+  # aws-profile --unset      <- unset the env vars
+  if [ -z "$1" ]; then
+    echo $AWS_PROFILE$AWS_DEFAULT_PROFILE
+  elif [ "$1" = "--unset" ]; then
+    AWS_PROFILE=
+    AWS_DEFAULT_PROFILE=
+    export AWS_PROFILE AWS_DEFAULT_PROFILE
+  else
+    AWS_DEFAULT_PROFILE=
+    export AWS_PROFILE=$1
+    export AWS_DEFAULT_PROFILE
+  fi;
+}
