@@ -15,6 +15,3 @@ sandbox_hook rvm gem
 sandbox_hook rvm irb
 sandbox_hook rvm ruby
 sandbox_hook rvm bundle
-
-sandbox_hook rvm fastlane
-sandbox_hook rvm pod
