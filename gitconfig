@@ -31,15 +31,13 @@
     co = checkout
     br = branch
     f = fetch --verbose --prune
-    up = "!git remote update --prune; git merge --ff-only @{u}"
-    stage = add
-    unstage = reset HEAD
     lol = log --pretty=oneline --abbrev-commit --graph --decorate
     plog = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
     pullall = "!f(){ git pull \"$@\" && git submodule update --init --recursive && git submodule foreach 'git checkout master; git rebase origin/master'; }; f"
     sync = "!f(){ git submodule foreach -q --recursive 'branch=\"$(git config -f $toplevel/.gitmodules submodule.$name.branch)\"; [ \"$branch\" = \"\" ] || git checkout $branch'; }; f"
     pushf = push --force-with-lease
     conflicts = diff --name-only --diff-filter=U
+    gh-pr = "!f(){ git fetch origin pull/$1/head:pr/$1; git checkout pr/$1; }; f"
 [mergetool "diffmerge"]
     cmd = /usr/local/bin/diffmerge --merge --result=\"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
     trustExitCode = true

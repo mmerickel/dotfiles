@@ -1,4 +1,4 @@
---ignore-file=~/.rgignore
+# --ignore-file=/Users/michael/.rgignore
 --max-columns=200
 --max-columns-preview
 --smart-case
