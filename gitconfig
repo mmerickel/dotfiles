@@ -4,6 +4,7 @@
     autocrlf = input
     ignorecase = false
 [init]
+    defaultBranch = master
     templatedir = ~/.git-templates
 [branch]
     autosetuprebase = local

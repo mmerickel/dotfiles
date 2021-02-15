@@ -38,21 +38,83 @@ tox() {
     env PATH=$TOX_PATH:$PATH tox $@
 }
 
-aws-profile () {
-  # USAGE:
-  # aws-profile              <- print out current value
-  # aws-profile PROFILE_NAME <- set PROFILE_NAME active
-  # aws-profile --unset      <- unset the env vars
-  if [ -z "$1" ]; then
-    echo $AWS_PROFILE
-  elif [ "$1" = "--unset" ]; then
-    AWS_PROFILE=
-    export AWS_PROFILE
-  else
-    export AWS_PROFILE=$1
-    unset AWS_DEFAULT_PROFILE
+aws-profile() {
+    read -r -d '' SCRIPT <<'EOF'
+import argparse
+from configparser import RawConfigParser
+import os
+import subprocess
+import sys
+
+# interactive output needs to be over stderr to avoid being captured
+# by the bash script looking for a profile name on stdout
+out = lambda *a, **kw: print(*a, **kw, file=sys.stderr)
+
+def select_profile():
+    config_profile_prefix = 'profile '
+    config_path = os.path.expanduser('~/.aws/config')
+
+    config = RawConfigParser()
+    config.read(config_path)
+
+    profiles = []
+    for section in config.sections():
+        if section.startswith(config_profile_prefix):
+            profile = section[len(config_profile_prefix):]
+            profiles.append(profile)
+
+    out('--- Choose AWS profile ---')
+    for idx, profile in enumerate(profiles, 1):
+        out(f'{idx}: {profile}')
+    out()
+
+    while True:
+        out(f'Pick one: [1-{len(profiles)}] ', end='')
+        choice = input()
+        if choice == 'q':
+            sys.exit(0)
+        try:
+            choice = int(choice) - 1
+            if not 0 <= choice < len(profiles):
+                raise Exception
+        except Exception:
+            out('Unrecognized option, try again.')
+        else:
+            break
+
+    return profiles[choice]
+
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('profile', nargs='?')
+    return parser.parse_args()
+
+def main():
+    args = parse_args()
+    profile = args.profile
+    if not profile:
+        profile = select_profile()
+
+    args = ['aws', 'configure', 'list']
+    env = {**dict(os.environ), 'AWS_PROFILE': profile}
+    p = subprocess.run(args, capture_output=True, text=True, env=env)
+
+    if p.returncode != 0:
+        out('Session is invalid, triggering an SSO login ...')
+        args = ['aws', 'sso', 'login']
+        subprocess.run(args, stdout=sys.stderr, env=env, text=True)
+
+    print(profile)
+
+if __name__ == '__main__':
+    sys.exit(main())
+EOF
+
+    local profile=$(python3 -c "$SCRIPT" "$@")
+    echo "Activated AWS_PROFILE=$profile"
+    export AWS_PROFILE=$profile
+    export AWS_DEFAULT_PROFILE=$profile
     unset AWS_ACCESS_KEY_ID
     unset AWS_SECRET_ACCESS_KEY
     unset AWS_SESSION_TOKEN
-  fi;
 }
