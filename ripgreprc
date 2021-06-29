@@ -3,3 +3,4 @@
 --max-columns-preview
 --smart-case
 --hidden
+--sort=path

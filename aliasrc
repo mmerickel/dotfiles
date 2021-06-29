@@ -45,12 +45,13 @@ from configparser import RawConfigParser
 import os
 import subprocess
 import sys
+from textwrap import dedent
 
 # interactive output needs to be over stderr to avoid being captured
 # by the bash script looking for a profile name on stdout
 out = lambda *a, **kw: print(*a, **kw, file=sys.stderr)
 
-def select_profile():
+def select_profile(current_profile=None):
     config_profile_prefix = 'profile '
     config_path = os.path.expanduser('~/.aws/config')
 
@@ -65,15 +66,18 @@ def select_profile():
 
     out('--- Choose AWS profile ---')
     for idx, profile in enumerate(profiles, 1):
-        out(f'{idx}: {profile}')
+        suffix = ' ** current **' if profile == current_profile else ''
+        out(f'{idx}: {profile}{suffix}')
     out()
 
     while True:
         out(f'Pick one: [1-{len(profiles)}] ', end='')
-        choice = input()
-        if choice == 'q':
-            sys.exit(0)
+        choice = input().strip()
         try:
+            if not choice and current_profile:
+                return current_profile
+            if choice == 'q':
+                sys.exit(0)
             choice = int(choice) - 1
             if not 0 <= choice < len(profiles):
                 raise Exception
@@ -86,14 +90,34 @@ def select_profile():
 
 def parse_args():
     parser = argparse.ArgumentParser()
+    parser.add_argument('-c', '--current', action='store_true')
+    parser.add_argument('--unset', action='store_true')
     parser.add_argument('profile', nargs='?')
     return parser.parse_args()
 
 def main():
     args = parse_args()
+
+    current_profile = os.getenv('AWS_PROFILE', '')
+    if args.current:
+        out(f'Current AWS_PROFILE={current_profile}')
+        return
+
+    if args.unset:
+        print(dedent(
+            '''
+            unset AWS_ACCESS_KEY_ID
+            unset AWS_SECRET_ACCESS_KEY
+            unset AWS_SESSION_TOKEN
+            unset AWS_PROFILE
+            unset AWS_DEFAULT_PROFILE
+            '''
+        ))
+        return
+
     profile = args.profile
     if not profile:
-        profile = select_profile()
+        profile = select_profile(current_profile)
 
     args = ['aws', 'configure', 'list']
     env = {**dict(os.environ), 'AWS_PROFILE': profile}
@@ -102,19 +126,28 @@ def main():
     if p.returncode != 0:
         out('Session is invalid, triggering an SSO login ...')
         args = ['aws', 'sso', 'login']
+        env['BROWSER'] = '/bin/echo'
         subprocess.run(args, stdout=sys.stderr, env=env, text=True)
 
-    print(profile)
+    out(f'Activated AWS_PROFILE={profile}')
+    print(dedent(
+        f'''
+        unset AWS_ACCESS_KEY_ID
+        unset AWS_SECRET_ACCESS_KEY
+        unset AWS_SESSION_TOKEN
+        export AWS_PROFILE={profile}
+        export AWS_DEFAULT_PROFILE={profile}
+        '''
+    ))
 
 if __name__ == '__main__':
-    sys.exit(main())
+    try:
+        sys.exit(main())
+    except KeyboardInterrupt:
+        pass
 EOF
 
-    local profile=$(python3 -c "$SCRIPT" "$@")
-    echo "Activated AWS_PROFILE=$profile"
-    export AWS_PROFILE=$profile
-    export AWS_DEFAULT_PROFILE=$profile
-    unset AWS_ACCESS_KEY_ID
-    unset AWS_SECRET_ACCESS_KEY
-    unset AWS_SESSION_TOKEN
+    eval "$(python3 -c "$SCRIPT" "$@")"
 }
+
+alias ap=aws-profile

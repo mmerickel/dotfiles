@@ -11,7 +11,7 @@ export rvm_path=$HOME/.rvm
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 
 # https://docs.amazonaws.cn/sdk-for-go/api/aws/credentials/processcreds/
-export AWS_SDK_LOAD_CONFIG=1
+# export AWS_SDK_LOAD_CONFIG=1
 
 export HOMEBREW_NO_ANALYTICS=1
 
