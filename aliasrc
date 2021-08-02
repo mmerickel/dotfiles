@@ -43,6 +43,7 @@ aws-profile() {
 import argparse
 from configparser import RawConfigParser
 import os
+import shutil
 import subprocess
 import sys
 from textwrap import dedent
@@ -51,7 +52,7 @@ from textwrap import dedent
 # by the bash script looking for a profile name on stdout
 out = lambda *a, **kw: print(*a, **kw, file=sys.stderr)
 
-def select_profile(current_profile=None):
+def parse_profiles():
     config_profile_prefix = 'profile '
     config_path = os.path.expanduser('~/.aws/config')
 
@@ -64,6 +65,9 @@ def select_profile(current_profile=None):
             profile = section[len(config_profile_prefix):]
             profiles.append(profile)
 
+    return profiles
+
+def select_profile_manual(profiles, current_profile=None):
     out('--- Choose AWS profile ---')
     for idx, profile in enumerate(profiles, 1):
         suffix = ' ** current **' if profile == current_profile else ''
@@ -88,6 +92,24 @@ def select_profile(current_profile=None):
 
     return profiles[choice]
 
+def select_profile_fzf(profiles, current_profile=None):
+    args = ['fzf', '--height', '40%']
+    if current_profile is not None:
+        try:
+            idx = profiles.index(current_profile)
+            # pull the current profile to the front of the list so that
+            # it's the default selection
+            profiles = [profiles[idx]] + profiles[:idx] + profiles[idx + 1 :]
+        except ValueError:
+            pass
+    in_profiles = '\n'.join(profiles)
+    p = subprocess.run(args, input=in_profiles, text=True, stdout=subprocess.PIPE)
+    if p.returncode != 0:
+        return
+    # the selected profile should be the last line in the output
+    profile = p.stdout.strip().split()[-1].strip()
+    return profile
+
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('-c', '--current', action='store_true')
@@ -101,7 +123,7 @@ def main():
     current_profile = os.getenv('AWS_PROFILE', '')
     if args.current:
         out(f'Current AWS_PROFILE={current_profile}')
-        return
+        return 1
 
     if args.unset:
         print(dedent(
@@ -113,11 +135,21 @@ def main():
             unset AWS_DEFAULT_PROFILE
             '''
         ))
-        return
+        return 0
 
     profile = args.profile
     if not profile:
-        profile = select_profile(current_profile)
+        profiles = parse_profiles()
+        if not profiles:
+            out('No aws profiles found in ~/.aws/config')
+            return 1
+        if shutil.which('fzf') is None:
+            profile = select_profile_manual(profiles, current_profile)
+        else:
+            profile = select_profile_fzf(profiles, current_profile)
+
+    if profile is None:
+        return 1
 
     args = ['aws', 'configure', 'list']
     env = {**dict(os.environ), 'AWS_PROFILE': profile}
@@ -139,15 +171,21 @@ def main():
         export AWS_DEFAULT_PROFILE={profile}
         '''
     ))
+    return 0
 
 if __name__ == '__main__':
     try:
         sys.exit(main())
     except KeyboardInterrupt:
-        pass
+        sys.exit(1)
 EOF
 
-    eval "$(python3 -c "$SCRIPT" "$@")"
+    result=$(python3 -c "$SCRIPT" "$@")
+    rc=$?
+    if [ $rc -ne 0 ]; then
+        return $rc
+    fi
+    eval "$result"
 }
 
 alias ap=aws-profile

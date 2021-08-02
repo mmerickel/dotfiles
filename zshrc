@@ -10,6 +10,10 @@ fi
 # do not require >! and >>!
 setopt CLOBBER
 
+# map kubeconfig to KUBECONFIG
+typeset -T KUBECONFIG kubeconfig :
+export KUBECONFIG
+
 # Completion Paths
 fpath=(
     $HOME/.zfunc
@@ -33,6 +37,10 @@ fi
 # Sandbox commands
 if [[ -a "${ZDOTDIR:-$HOME}/.sandboxd" ]]; then
     source "${ZDOTDIR:-$HOME}/.sandboxd"
+fi
+
+if [[ -a "${ZDOTDIR:-$HOME}/.fzf.sh" ]]; then
+    source ~/.fzf.zsh
 fi
 
 # Local config
