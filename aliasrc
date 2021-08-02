@@ -141,7 +141,7 @@ def main():
     if not profile:
         profiles = parse_profiles()
         if not profiles:
-            out('No aws profiles found in ~/.aws/config')
+            out('No profiles found in ~/.aws/config')
             return 1
         if shutil.which('fzf') is None:
             profile = select_profile_manual(profiles, current_profile)
@@ -149,6 +149,7 @@ def main():
             profile = select_profile_fzf(profiles, current_profile)
 
     if profile is None:
+        out(f'No profile selected.')
         return 1
 
     args = ['aws', 'configure', 'list']
