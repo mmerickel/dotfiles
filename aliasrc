@@ -169,11 +169,17 @@ def main():
     env = {**dict(os.environ), 'AWS_PROFILE': profile}
     p = subprocess.run(args, capture_output=True, text=True, env=env)
 
-    if p.returncode != 0:
+    if p.returncode != 0 and 'Error loading SSO Token' in p.stderr:
         out('Session is invalid, triggering an SSO login ...')
         args = ['aws', 'sso', 'login']
         env['BROWSER'] = '/bin/echo'
-        subprocess.run(args, stdout=sys.stderr, env=env, text=True)
+        p = subprocess.run(args, stdout=sys.stderr, env=env, text=True)
+        if p.returncode != 0:
+            raise SystemExit(1)
+
+    elif p.returncode != 0:
+        out(p.stderr)
+        raise SystemExit(p.returncode)
 
     out(f'Activated AWS_PROFILE={profile}')
     print(dedent(
