@@ -111,11 +111,24 @@ def select_profile_fzf(profiles, current_profile=None):
     return profile
 
 def parse_args():
-    parser = argparse.ArgumentParser()
+    try:
+        args = sys.argv[sys.argv.index('--') + 1:]
+    except IndexError:
+        args = sys.argv[1:]
+
+    parser = argparse.ArgumentParser(prog='aws-profile', add_help=False)
+    parser.add_argument('-h', '--help', action='store_true')
     parser.add_argument('-c', '--current', action='store_true')
     parser.add_argument('--unset', action='store_true')
     parser.add_argument('profile', nargs='?')
-    return parser.parse_args()
+    args = parser.parse_args(args)
+
+    # take over help so that we can use stderr and exit with an error
+    # to avoid the output being eval'd
+    if args.help:
+        parser.print_help(file=sys.stderr)
+        raise SystemExit(1)
+    return args
 
 def main():
     args = parse_args()
@@ -176,12 +189,12 @@ def main():
 
 if __name__ == '__main__':
     try:
-        sys.exit(main())
+        raise SystemExit(main())
     except KeyboardInterrupt:
-        sys.exit(1)
+        raise SystemExit(1)
 EOF
 
-    result=$(python3 -c "$SCRIPT" "$@")
+    result=$(python3 -c "$SCRIPT" -- "$@")
     rc=$?
     if [ $rc -ne 0 ]; then
         return $rc
