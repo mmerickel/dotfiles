@@ -212,3 +212,5 @@ EOF
 }
 
 alias ap=aws-profile
+
+alias kp=switch
