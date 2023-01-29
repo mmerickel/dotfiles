@@ -214,3 +214,20 @@ EOF
 alias ap=aws-profile
 
 alias kp=switch
+
+function curlt {
+    curl -w "\
+    namelookup:  %{time_namelookup}s\n\
+       connect:  %{time_connect}s\n\
+    appconnect:  %{time_appconnect}s\n\
+   pretransfer:  %{time_pretransfer}s\n\
+      redirect:  %{time_redirect}s\n\
+ starttransfer:  %{time_starttransfer}s\n\
+    time_total:  %{time_total}s\n\
+   size_header:  %{size_header} bytes\n\
+ size_download:  %{size_download} bytes\n\
+speed_download:  %{speed_download} bytes/sec\n\
+  speed_upload:  %{speed_upload} bytes/sec\n\
+---------------\n\
+         total:  %{time_total}s\n" "$@"
+}
