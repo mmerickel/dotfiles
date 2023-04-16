@@ -20,10 +20,6 @@
 [merge]
     conflictstyle = diff3
     renamelimit = 999999
-[interactive]
-    diffFilter = delta --color-only
-[delta]
-    navigate = true
 [color]
     diff = auto
     status = auto
