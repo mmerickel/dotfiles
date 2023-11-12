@@ -4,7 +4,7 @@
     autocrlf = input
     ignorecase = false
 [init]
-    defaultBranch = master
+    defaultBranch = main
     templatedir = ~/.git-templates
 [branch]
     autosetuprebase = local
@@ -54,7 +54,9 @@
 [difftool "sourcetree"]
     cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+[diff "lfs"]
+    textconv = cat
