@@ -10,23 +10,11 @@ fi
 # do not require >! and >>!
 setopt CLOBBER
 
-# map kubeconfig to KUBECONFIG
-typeset -T KUBECONFIG kubeconfig :
-export KUBECONFIG
-
 # Completion Paths
 fpath=(
     $HOME/.zfunc
     /usr/local/share/zsh-completions
     $fpath
-)
-
-# Paths
-path=(
-    "$HOME/.bin"
-    "$HOME/.local/bin"
-    /usr/local/{bin,sbin}
-    $path
 )
 
 # Aliases

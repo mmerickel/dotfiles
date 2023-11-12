@@ -16,10 +16,9 @@ fi
 export VISUAL=$EDITOR
 export PAGER='less'
 
-# Language
-if [[ -z "$LANG" ]]; then
-  export LANG='en_US.UTF-8'
-fi
+# map kubeconfig to KUBECONFIG
+typeset -T KUBECONFIG kubeconfig :
+export KUBECONFIG
 
 # Paths
 # Ensure path arrays do not contain duplicates.
@@ -29,6 +28,15 @@ typeset -gU cdpath fpath mailpath path
 # cdpath=(
 #   $cdpath
 # )
+
+# Set the list of directories that Zsh searches for programs.
+path=(
+    "$HOME/bin"
+    "$HOME/.local/bin"
+    "$HOME/.dotfiles/bin"
+    /usr/local/{bin,sbin}
+    $path
+)
 
 #
 # Set the default Less options.
@@ -41,9 +49,6 @@ export LESS='-g -i -M -R -S -w -X -z-4'
 if (( $#commands[(i)lesspipe(|.sh)] )); then
   export LESSOPEN="| /usr/bin/env $commands[(i)lesspipe(|.sh)] %s 2>&-"
 fi
-
-# Temporary Files
-TMPPREFIX="$(mktemp -d)/zsh"
 
 # Local config
 if [[ -a "${ZDOTDIR:-$HOME}/.zprofile.local" ]]; then
