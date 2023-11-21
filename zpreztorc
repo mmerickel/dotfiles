@@ -149,6 +149,9 @@ zstyle ':prezto:module:history' savehist 100000
 #zstyle ':prezto:module:prompt' theme 'nicoulaj'
 zstyle ':prezto:module:prompt' theme 'pure'
 
+# Do not show untracked files as dirty
+PURE_GIT_UNTRACKED_DIRTY=0
+
 # Set the working directory prompt display length.
 # By default, it is set to 'short'. Set it to 'long' (without '~' expansion)
 # for longer or 'full' (with '~' expansion) for even longer prompt display.
