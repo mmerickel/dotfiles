@@ -169,13 +169,14 @@ def main():
     env = {**dict(os.environ), 'AWS_PROFILE': profile}
     p = subprocess.run(args, capture_output=True, text=True, env=env)
 
+    stderr = p.stderr.lower()
     if p.returncode != 0 and (
-        'Error loading SSO Token' in p.stderr
-        or 'SSO session associated with this profile has expired' in p.stderr
+        'error loading sso token' in stderr
+        or 'error when retrieving token' in stderr
+        or 'sso session associated with this profile has expired' in stderr
     ):
         out('Session is invalid, triggering an SSO login ...')
-        args = ['aws', 'sso', 'login']
-        env['BROWSER'] = '/bin/echo'
+        args = ['aws', 'sso', 'login', '--no-browser']
         p = subprocess.run(args, stdout=sys.stderr, env=env, text=True)
         if p.returncode != 0:
             raise SystemExit(1)

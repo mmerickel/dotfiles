@@ -54,3 +54,6 @@ fi
 if [[ -a "${ZDOTDIR:-$HOME}/.zprofile.local" ]]; then
     source "${ZDOTDIR:-$HOME}/.zprofile.local"
 fi
+
+# added by Snowflake SnowSQL installer v1.2
+export PATH=/Applications/SnowSQL.app/Contents/MacOS:$PATH

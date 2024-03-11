@@ -14,6 +14,7 @@ export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 # export AWS_SDK_LOAD_CONFIG=1
 
 export HOMEBREW_NO_ANALYTICS=1
+export HOMEBREW_NO_ENV_HINTS=1
 
 if [[ -a "$HOME/.local/cacerts.pem" ]]; then
     export REQUESTS_CA_BUNDLE=$HOME/.local/cacerts.pem
