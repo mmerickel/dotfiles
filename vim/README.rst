@@ -15,11 +15,9 @@ Clone the repository
 
 ::
 
-    git clone https://github.com/mmerickel/vim-settings.git ${HOME}/.vim
+    git clone https://github.com/mmerickel/dotfiles.git ${HOME}/dotfiles
     git submodule init
     git submodule update
-
-or ``C:\Users\USERNAME\_vimfiles`` on Windows.
 
 Setup the vimrc
 ~~~~~~~~~~~~~~~
@@ -41,5 +39,9 @@ If the repository wasn't configured on VIM's runtime path, it can be placed
 on the path by setting ``g:vim_local``::
 
     let g:vim_local = '~/.vim'
+
+or on Windows::
+
+    let g:vim_local = 'C:\Users\USERNAME\dotfiles\vim'
 
 .. _pathogen: https://github.com/tpope/vim-pathogen
