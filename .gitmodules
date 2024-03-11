@@ -1,11 +1,95 @@
-[submodule "vim"]
-	path = vim
-	url = https://github.com/mmerickel/vim-settings.git
-	branch = master
 [submodule "zprezto"]
 	path = zprezto
-    url = https://github.com/sorin-ionescu/prezto.git
+	url = https://github.com/sorin-ionescu/prezto.git
 	branch = master
 [submodule "sandboxd"]
 	path = sandboxd
 	url = https://github.com/benvan/sandboxd.git
+[submodule "vim/bundle/nerdtree"]
+	path = vim/bundle/nerdtree
+	url = https://github.com/scrooloose/nerdtree
+	branch = master
+[submodule "vim/bundle/repeat"]
+	path = vim/bundle/repeat
+	url = https://github.com/tpope/vim-repeat
+	branch = master
+[submodule "vim/bundle/surround"]
+	path = vim/bundle/surround
+	url = https://github.com/tpope/vim-surround
+	branch = master
+[submodule "vim/bundle/pathogen"]
+	path = vim/bundle/pathogen
+	url = https://github.com/tpope/vim-pathogen
+	branch = master
+[submodule "vim/bundle/ctrlp"]
+	path = vim/bundle/ctrlp
+	url = https://github.com/ctrlpvim/ctrlp.vim.git
+	branch = master
+[submodule "vim/bundle/javascript"]
+	path = vim/bundle/javascript
+	url = https://github.com/pangloss/vim-javascript
+	branch = master
+[submodule "vim/bundle/Dockerfile"]
+	path = vim/bundle/Dockerfile
+	url = https://github.com/ekalinin/Dockerfile.vim.git
+    branch = master
+[submodule "vim/bundle/go"]
+	path = vim/bundle/go
+	url = https://github.com/jnwhiteh/vim-golang.git
+	branch = master
+[submodule "vim/bundle/toml"]
+	path = vim/bundle/toml
+	url = https://github.com/cespare/vim-toml.git
+	branch = master
+[submodule "vim/bundle/csv"]
+	path = vim/bundle/csv
+	url = https://github.com/chrisbra/csv.vim.git
+	branch = master
+[submodule "vim/bundle/json"]
+	path = vim/bundle/json
+	url = https://github.com/elzr/vim-json
+	branch = master
+[submodule "vim/bundle/jsx"]
+	path = vim/bundle/jsx
+	url = https://github.com/mxw/vim-jsx.git
+	branch = master
+[submodule "vim/bundle/rust"]
+	path = vim/bundle/rust
+	url = https://github.com/rust-lang/rust.vim.git
+[submodule "vim/bundle/fugitive"]
+	path = vim/bundle/fugitive
+	url = https://github.com/tpope/vim-fugitive.git
+[submodule "vim/bundle/gruvbox"]
+	path = vim/bundle/gruvbox
+	url = https://github.com/morhetz/gruvbox.git
+[submodule "vim/bundle/terraform"]
+	path = vim/bundle/terraform
+	url = https://github.com/hashivim/vim-terraform.git
+[submodule "vim/bundle/command-t"]
+	path = vim/bundle/command-t
+	url = https://github.com/wincent/command-t.git
+[submodule "vim/bundle/python"]
+	path = vim/bundle/python
+	url = https://github.com/vim-python/python-syntax.git
+[submodule "vim/bundle/nix"]
+	path = vim/bundle/nix
+	url = https://github.com/LnL7/vim-nix.git
+[submodule "vim/bundle/jinja"]
+	path = vim/bundle/jinja
+	url = https://github.com/Glench/Vim-Jinja2-Syntax.git
+[submodule "vim/bundle/jsonnet"]
+	path = vim/bundle/jsonnet
+	url = https://github.com/google/vim-jsonnet
+[submodule "vim/bundle/vim-code-dark"]
+	path = vim/bundle/vim-code-dark
+	url = https://github.com/tomasiser/vim-code-dark.git
+[submodule "vim/bundle/ripgrep"]
+	path = vim/bundle/ripgrep
+	url = https://github.com/jremmen/vim-ripgrep.git
+[submodule "vim/bundle/rooter"]
+	path = vim/bundle/rooter
+	url = https://github.com/airblade/vim-rooter.git
+[submodule "vim/bundle/coc"]
+	path = vim/bundle/coc
+	url = https://github.com/neoclide/coc.nvim
+	branch = release
