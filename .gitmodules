@@ -32,7 +32,7 @@
 [submodule "vim/bundle/Dockerfile"]
 	path = vim/bundle/Dockerfile
 	url = https://github.com/ekalinin/Dockerfile.vim.git
-    branch = master
+	branch = master
 [submodule "vim/bundle/go"]
 	path = vim/bundle/go
 	url = https://github.com/jnwhiteh/vim-golang.git
@@ -40,7 +40,7 @@
 [submodule "vim/bundle/toml"]
 	path = vim/bundle/toml
 	url = https://github.com/cespare/vim-toml.git
-	branch = master
+	branch = main
 [submodule "vim/bundle/csv"]
 	path = vim/bundle/csv
 	url = https://github.com/chrisbra/csv.vim.git
@@ -56,39 +56,51 @@
 [submodule "vim/bundle/rust"]
 	path = vim/bundle/rust
 	url = https://github.com/rust-lang/rust.vim.git
+	branch = master
 [submodule "vim/bundle/fugitive"]
 	path = vim/bundle/fugitive
 	url = https://github.com/tpope/vim-fugitive.git
+	branch = master
 [submodule "vim/bundle/gruvbox"]
 	path = vim/bundle/gruvbox
 	url = https://github.com/morhetz/gruvbox.git
+	branch = master
 [submodule "vim/bundle/terraform"]
 	path = vim/bundle/terraform
 	url = https://github.com/hashivim/vim-terraform.git
+	branch = master
 [submodule "vim/bundle/command-t"]
 	path = vim/bundle/command-t
 	url = https://github.com/wincent/command-t.git
+	branch = master
 [submodule "vim/bundle/python"]
 	path = vim/bundle/python
 	url = https://github.com/vim-python/python-syntax.git
+	branch = master
 [submodule "vim/bundle/nix"]
 	path = vim/bundle/nix
 	url = https://github.com/LnL7/vim-nix.git
+	branch = master
 [submodule "vim/bundle/jinja"]
 	path = vim/bundle/jinja
 	url = https://github.com/Glench/Vim-Jinja2-Syntax.git
+	branch = master
 [submodule "vim/bundle/jsonnet"]
 	path = vim/bundle/jsonnet
 	url = https://github.com/google/vim-jsonnet
+	branch = master
 [submodule "vim/bundle/vim-code-dark"]
 	path = vim/bundle/vim-code-dark
 	url = https://github.com/tomasiser/vim-code-dark.git
+	branch = master
 [submodule "vim/bundle/ripgrep"]
 	path = vim/bundle/ripgrep
 	url = https://github.com/jremmen/vim-ripgrep.git
+	branch = master
 [submodule "vim/bundle/rooter"]
 	path = vim/bundle/rooter
 	url = https://github.com/airblade/vim-rooter.git
+	branch = master
 [submodule "vim/bundle/coc"]
 	path = vim/bundle/coc
 	url = https://github.com/neoclide/coc.nvim
