@@ -1,0 +1,17 @@
+{
+  "suggest.noselect": true,
+  "suggest.enableFloat": false,
+  "diagnostic.messageTarget": "echo",
+  "signature.target": "echo",
+  "hover.target": "echo",
+  "languageserver": {
+    "terraform": {
+      "command": "terraform-lsp",
+      "filetypes": [
+        "terraform",
+        "tf",
+        "tfvars"
+      ]
+    }
+  }
+}
