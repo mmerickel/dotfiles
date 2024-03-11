@@ -27,10 +27,6 @@ if [[ -a "${ZDOTDIR:-$HOME}/.sandboxd" ]]; then
     source "${ZDOTDIR:-$HOME}/.sandboxd"
 fi
 
-if [[ -a "${ZDOTDIR:-$HOME}/.fzf.sh" ]]; then
-    source ~/.fzf.zsh
-fi
-
 # Local config
 if [[ -a "${ZDOTDIR:-$HOME}/.zshrc.local" ]]; then
     source "${ZDOTDIR:-$HOME}/.zshrc.local"
