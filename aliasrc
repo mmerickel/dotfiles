@@ -1,3 +1,4 @@
+# vim: filetype=zsh
 alias dotf='cd $HOME/.dotfiles'
 
 alias la='ls -a'

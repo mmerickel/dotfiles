@@ -1,3 +1,4 @@
+# vim: filetype=zsh
 sandbox_init_nvm() {
     source $(brew --prefix nvm)/nvm.sh
 }

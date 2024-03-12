@@ -1,3 +1,4 @@
+# vim: filetype=gitconfig
 [include]
     path = .gitconfig.inc
 [core]
@@ -26,6 +27,13 @@
     branch = auto
     interactive = auto
     ui = auto
+[filter "lfs"]
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+[diff "lfs"]
+    textconv = cat
 [alias]
     cp = cherry-pick
     st = status -sb
@@ -41,22 +49,12 @@
     conflicts = diff --name-only --diff-filter=U
     gh-pr = "!f(){ git fetch origin pull/$1/head:pr/$1; git checkout pr/$1; }; f"
 [mergetool "diffmerge"]
-    cmd = /usr/local/bin/diffmerge --merge --result=\"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
+    cmd = /usr/local/bin/diffmerge --merge --result="$MERGED" "$LOCAL" "$BASE" "$REMOTE"
     trustExitCode = true
 [mergetool "sourcetree"]
-    cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-    trustExitCode = true
-[mergetool "splice-osx"]
-    cmd = "mvim -f $BASE $LOCAL $REMOTE $MERGED -c 'SpliceInit'"
+    cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh "$LOCAL" "$REMOTE" -ancestor "$BASE" -merge "$MERGED"
     trustExitCode = true
 [difftool "diffmerge"]
-    cmd = /usr/local/bin/diffmerge \"$LOCAL\" \"$REMOTE\"
+    cmd = /usr/local/bin/diffmerge "$LOCAL" "$REMOTE"
 [difftool "sourcetree"]
-    cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-[filter "lfs"]
-    clean = git-lfs clean -- %f
-    smudge = git-lfs smudge -- %f
-    process = git-lfs filter-process
-    required = true
-[diff "lfs"]
-    textconv = cat
+    cmd = opendiff "$LOCAL" "$REMOTE"
