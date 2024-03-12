@@ -5,6 +5,9 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'preservim/nerdtree', { 'on':  ['NERDTreeClose', 'NERDTreeToggle'] }
 Plug 'tomasiser/vim-code-dark'
 
+Plug 'nvim-lua/plenary.nvim'  " required for telescope
+Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' }
+
 call plug#end()
 
 " Turn backup off
@@ -257,4 +260,29 @@ require'nvim-treesitter.configs'.setup {
     additional_vim_regex_highlighting = false,
   },
 }
+EOF
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Telescope
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+lua << EOF
+local telescope = require("telescope")
+local actions = require("telescope.actions")
+
+telescope.setup({
+  defaults = {
+    path_display = { "truncate" },
+    mappings = {
+      i = {
+        ["<C-k>"] = actions.move_selection_previous,
+        ["<C-j>"] = actions.move_selection_next,
+      },
+    },
+  },
+})
 EOF
