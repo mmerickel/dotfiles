@@ -1,8 +1,8 @@
 DOTFILES=$(shell pwd)
 LN=ln -snf
 
-.PHONY: all zsh tmux vim git
-all: zsh tmux vim git
+.PHONY: all zsh tmux vim git nvim
+all: zsh tmux vim git nvim
 
 zsh:
 	$(LN) $(DOTFILES)/zshenv $(HOME)/.zshenv
@@ -30,3 +30,7 @@ git:
 	$(LN) $(DOTFILES)/gitconfig $(HOME)/.gitconfig
 	$(LN) $(DOTFILES)/gitignore $(HOME)/.gitignore
 	$(LN) $(DOTFILES)/git-templates $(HOME)/.git-templates
+
+nvim:
+	mkdir -p $(HOME)/.config
+	$(LN) $(DOTFILES)/nvim $(HOME)/.config/nvim
