@@ -24,6 +24,7 @@ Plug 'tomasiser/vim-code-dark'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
+Plug 'windwp/nvim-projectconfig'
 
 call plug#end()
 
@@ -355,10 +356,10 @@ let g:jsx_ext_required = 0
 " => NERDTree
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let NERDTreeIgnore = [
-	\ '\.jpg$', '\.gif$', '\.png$', '\.hdr$', '\.gz$'
-	\ , '\.o$', '\.obj$', '\.so$', '\.a$', '\.dll$', '\.dylib$'
-	\ , '\.svn$', '\.git$', '\.swp$', '\.pyc$', '\.DS_Store'
-	\ , '\.class$', '__pycache__', '.ruff_cache' ]
+  \ '\.jpg$', '\.gif$', '\.png$', '\.hdr$', '\.gz$'
+  \ , '\.o$', '\.obj$', '\.so$', '\.a$', '\.dll$', '\.dylib$'
+  \ , '\.svn$', '\.git$', '\.swp$', '\.pyc$', '\.DS_Store'
+  \ , '\.class$', '__pycache__', '.ruff_cache' ]
 let NERDTreeWinPos = "right"
 let NERDTreeQuitOnOpen = 0
 let NERDTreeHighlightCursorline = 1
@@ -458,3 +459,7 @@ require'nvim-treesitter.configs'.setup {
   },
 }
 EOF
+
+if filereadable(stdpath('config') . '/local/init.vim')
+  execute 'source ' . stdpath('config') . '/local/init.vim'
+endif
