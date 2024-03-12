@@ -4,6 +4,7 @@
 " Install plugins
 call plug#begin(stdpath('config') . '/plugged')
 
+Plug 'airblade/vim-rooter'
 Plug 'chrisbra/csv.vim'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'elzr/vim-json'
@@ -365,6 +366,13 @@ let NERDTreeDirArrows = 0
 let NERDTreeMinimalUI = 1
 let NERDTreeShowHidden = 1
 nnoremap <leader>do :NERDTreeToggle<cr>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => rooter
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:rooter_cd_cmd = 'lcd'
+let g:rooter_patterns = ['.git', '.hg', '.svn']
+let g:rooter_buftypes = ['']
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Telescope
