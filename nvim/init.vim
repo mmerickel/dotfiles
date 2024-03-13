@@ -73,7 +73,7 @@ set nojoinspaces
 syntax on
 
 " Set colorscheme
-colorscheme codedark
+colorscheme tokyonight-night
 
 " Set terminal title
 set title
@@ -338,6 +338,7 @@ command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.org
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+autocmd User CocStatusChange redrawstatus
 
 " Mappings for CoCList
 " Show all diagnostics
