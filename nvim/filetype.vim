@@ -11,4 +11,6 @@ augroup filetypedetect
     au! BufRead,BufNewFile Fastfile setf ruby
     au! BufRead,BufNewFile Appfile setf ruby
     au! BufRead,BufNewFile Deliverfile setf ruby
+    "au! BufRead,BufNewFile *.mako setf html.mako
+    "au! BufRead,BufNewFile *.jinja2 setf htmljinja
 augroup END

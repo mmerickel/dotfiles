@@ -8,9 +8,9 @@ Plug 'airblade/vim-rooter'
 Plug 'chrisbra/csv.vim'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'elzr/vim-json'
-Plug 'Glench/Vim-Jinja2-Syntax'
-Plug 'hashivim/vim-terraform'
+Plug 'glench/vim-jinja2-syntax'
 Plug 'google/vim-jsonnet'
+Plug 'hashivim/vim-terraform'
 Plug 'LnL7/vim-nix'
 Plug 'mxw/vim-jsx'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -21,6 +21,8 @@ Plug 'pangloss/vim-javascript'
 Plug 'preservim/nerdtree', { 'on':  ['NERDTree', 'NERDTreeToggle'] }
 Plug 'rust-lang/rust.vim'
 Plug 'tomasiser/vim-code-dark'
+Plug 'sophacles/vim-bundle-mako'
+Plug 'stevearc/dressing.nvim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
@@ -46,6 +48,11 @@ set updatetime=300
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text Options
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Default indentation
+set shiftwidth=4
+set tabstop=4
+set expandtab
+
 " Allow the cursor to go everywhere
 set virtualedit=insert,onemore,block
 
