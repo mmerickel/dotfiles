@@ -1,22 +1,21 @@
 {
   "suggest.noselect": true,
-  "suggest.enableFloat": false,
-  "diagnostic.messageTarget": "echo",
-  "signature.target": "echo",
-  "hover.target": "echo",
   "languageserver": {
     "terraform": {
       "command": "terraform-ls",
-      "args": ["serve"],
+      "args": [
+        "serve"
+      ],
       "filetypes": [
         "terraform",
-        "tf",
-      ]
+        "tf"
+      ],
+      "initializationOptions": {}
     }
   },
   "workspace.ignoredFolders": [
-      "$HOME",
-      "$HOME/.cargo/**",
-      "$HOME/.rustup/**"
+    "$HOME",
+    "$HOME/.cargo/**",
+    "$HOME/.rustup/**"
   ]
 }

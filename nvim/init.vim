@@ -207,6 +207,13 @@ noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd BufEnter,BufRead,BufNewFile,InsertLeave * match ExtraWhitespace /\s\+$/
 
+autocmd FileType html,css,scss,sass setlocal sw=2 ts=2 et
+autocmd FileType javascript,javascript.jsx,htmljinja setlocal sw=2 ts=2 et
+autocmd FileType json setlocal sw=2 ts=2 et
+autocmd FileType jsonnet setlocal sw=2 ts=2 et
+autocmd FileType rst setlocal sw=2 ts=2 et
+autocmd FileType yaml setlocal sw=2 ts=2 et
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => CoC
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
