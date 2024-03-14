@@ -1,10 +1,6 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General Setup
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Recommended by nvim-tree to disable netrw
-let g:loaded_netrw = 1
-let g:loaded_netrwPlugin = 1
-
 " Polyglot config needs to be done very early
 " Disable various file types that we are handling with more modern plugins
 let g:polyglot_disabled = [
@@ -435,6 +431,8 @@ autocmd User CocStatusChange,CocDiagnosticChange lua require('lualine').refresh(
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 lua << EOF
 require('nvim-tree').setup({
+  disable_netrw = false,
+  hijack_netrw = true,
   view = {
     width = 35,
     side = 'right',
@@ -448,11 +446,11 @@ require('nvim-tree').setup({
       '\\.class$', '^__pycache__$', '^\\.ruff_cache$',
     },
   },
-  git = {
-    enable = false,
-  },
   live_filter = {
     always_show_folders = false,
+  },
+  git = {
+    enable = false,
   },
 })
 EOF
