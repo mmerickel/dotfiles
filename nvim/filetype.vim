@@ -14,4 +14,5 @@ augroup filetypedetect
     au! BufRead,BufNewFile Deliverfile setf ruby
     au! BufRead,BufNewFile .mrconfig setf ini
     au! BufRead,BufNewFile .yamllint setf yaml
+    au! BufRead,BufNewFile .env,.env.* setf sh
 augroup END
