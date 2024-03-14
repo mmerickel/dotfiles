@@ -17,14 +17,13 @@ alias k='kubectl'
 alias mux='tmuxinator'
 alias tf='terraform'
 
+if [[ -v VI ]]; then
+    alias vi=$VI
+fi
+
 if [[ "$OSTYPE" == darwin* ]]; then
     alias ls='ls -G'
     export LSCOLORS=gxfxcxdxbxegedabagacad
-fi
-
-if [[ -f "/Applications/MacVim.app/Contents/MacOS/Vim" ]]; then
-    alias vim='/Applications/MacVim.app/Contents/MacOS/Vim'
-    alias vi='vim'
 fi
 
 tox() {

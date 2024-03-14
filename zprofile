@@ -8,12 +8,17 @@ if [[ "$OSTYPE" == darwin* ]]; then
 fi
 
 # Editors
-if [[ -f "/Applications/MacVim.app/Contents/MacOS/Vim" ]]; then
-    export EDITOR='/Applications/MacVim.app/Contents/MacOS/Vim'
-else
-    export EDITOR='vi'
+VI='vi'
+if type nvim > /dev/null; then
+    VI='nvim'
+elif type /opt/homebrew/bin/nvim > /dev/null; then
+    VI='/opt/homebrew/bin/nvim'
+elif type vim > /dev/null; then
+    VI='vim'
 fi
-export VISUAL=$EDITOR
+export VI
+export EDITOR=$VI
+export VISUAL=$VI
 export PAGER='less'
 
 # map kubeconfig to KUBECONFIG
