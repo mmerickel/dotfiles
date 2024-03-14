@@ -1,8 +1,8 @@
 DOTFILES=$(shell pwd)
 LN=ln -snf
 
-.PHONY: all zsh tmux vim git nvim
-all: zsh tmux vim git nvim
+.PHONY: all zsh tmux git nvim
+all: zsh tmux git nvim
 
 zsh:
 	$(LN) $(DOTFILES)/zshenv $(HOME)/.zshenv
@@ -22,9 +22,6 @@ zsh:
 
 tmux:
 	$(LN) $(DOTFILES)/tmux.conf $(HOME)/.tmux.conf
-
-vim:
-	$(LN) $(DOTFILES)/vim $(HOME)/.vim
 
 git:
 	$(LN) $(DOTFILES)/gitconfig $(HOME)/.gitconfig
