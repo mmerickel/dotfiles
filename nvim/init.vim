@@ -5,18 +5,27 @@
 let g:loaded_netrw = 1
 let g:loaded_netrwPlugin = 1
 
+" Polyglot config needs to be done very early
+" Disable various file types that we are handling with more modern plugins
+let g:polyglot_disabled = [
+  \ 'csv',
+  \ 'javascript',
+  \ 'jsonnet',
+  \ 'jsx',
+  \ 'rust',
+  \ 'sensible',
+  \ ]
+
 " Install plugins
 call plug#begin(stdpath('config') . '/plugged')
 
 Plug 'airblade/vim-rooter'
 Plug 'chrisbra/csv.vim'
 Plug 'ekalinin/Dockerfile.vim'
-Plug 'elzr/vim-json'
 Plug 'folke/tokyonight.nvim'
 Plug 'glench/vim-jinja2-syntax'
+Plug 'godlygeek/tabular'
 Plug 'google/vim-jsonnet'
-Plug 'hashivim/vim-terraform'
-Plug 'LnL7/vim-nix'
 Plug 'machakann/vim-highlightedyank'
 Plug 'mxw/vim-jsx'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -28,9 +37,9 @@ Plug 'nvim-tree/nvim-tree.lua'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'pangloss/vim-javascript'
 Plug 'rust-lang/rust.vim'
-Plug 'tomasiser/vim-code-dark'
-Plug 'sophacles/vim-bundle-mako'
+Plug 'sheerun/vim-polyglot'
 Plug 'stevearc/dressing.nvim'
+Plug 'tomasiser/vim-code-dark'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
@@ -64,6 +73,11 @@ set shiftwidth=4
 set tabstop=4
 set expandtab
 
+" Indent sanely
+set autoindent
+set copyindent
+set smarttab
+
 " Allow the cursor to go everywhere
 set virtualedit=insert,onemore,block
 
@@ -72,6 +86,9 @@ set shiftround
 
 " Wrap lines
 set wrap
+
+" When wrapping, break on words instead of characters
+set linebreak
 
 " Avoid adding 2 spaces when joining lines together.
 set nojoinspaces
@@ -94,7 +111,7 @@ set cursorcolumn
 set colorcolumn=90
 
 " Set # of lines visible around the cursor when scrolling vertically
-set scrolloff=10
+set scrolloff=5
 
 " Always show the signcolumn otherwise coc will hide/show it all the time
 set signcolumn=yes
@@ -205,25 +222,37 @@ noremap j gj
 noremap H g^
 noremap L g$
 
+"Display the end of lines and tabs as special characters
+set listchars=tab:>-,trail:+,eol:$
+set list
+nnoremap <silent> <leader>s :set nolist!<cr>
+
 " Toggle line numbers
 nnoremap <leader>n :set nu!<cr>
 
 " Preserve indentation while pasting text from the OS X clipboard
 noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>
 
+"Resize the window
+nnoremap <leader>el :set columns=220<cr>
+nnoremap <leader>ej :set columns=130<cr>
+nnoremap <leader>eh :set columns=90<cr>
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Autocommands
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if !exists("autocommands_loaded")
-    let autocommands_loaded = 1
+  let autocommands_loaded = 1
+
   " Have Vim jump to the last position when reopening a file
   autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
-      \| exe "normal g'\"" | endif
+    \| exe "normal g'\"" | endif
 
   "Avoid showing whitespace while in insert mode
   autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
   autocmd BufEnter,BufRead,BufNewFile,InsertLeave * match ExtraWhitespace /\s\+$/
 
+  " Override settings for various filetypes
   autocmd FileType html,css,scss,sass setlocal sw=2 ts=2 et
   autocmd FileType javascript,javascript.jsx,htmljinja setlocal sw=2 ts=2 et
   autocmd FileType json setlocal sw=2 ts=2 et
@@ -478,13 +507,15 @@ require'nvim-treesitter.configs'.setup {
     "hcl",
     "html",
     "javascript",
+    "json",
     "lua",
     "markdown",
     "python",
-    "rst",
+    "query",
     "rust",
     "toml",
     "vim",
+    "vimdoc",
   },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
@@ -495,7 +526,9 @@ require'nvim-treesitter.configs'.setup {
   auto_install = true,
 
   -- List of parsers to ignore installing (for "all")
-  ignore_install = { },
+  ignore_install = {
+    "rst",
+  },
 
   ---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
   -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
@@ -503,6 +536,11 @@ require'nvim-treesitter.configs'.setup {
   highlight = {
     -- `false` will disable the whole extension
     enable = true,
+
+    -- Do not use treesitter for these languages
+    disable = {
+      "rst", -- highlighting is just poor, doesn't highlight links etc
+    },
 
     -- Disable tree-sitter when the file is too large
     -- disable = function(lang, buf)
