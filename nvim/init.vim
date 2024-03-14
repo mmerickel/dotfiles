@@ -53,6 +53,9 @@ set history=1000
 " Update time for various features
 set updatetime=300
 
+" Favorite filetypes
+set ffs=unix,dos,mac
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text Options
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -211,17 +214,24 @@ noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Autocommands
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"Avoid showing whitespace while in insert mode
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-autocmd BufEnter,BufRead,BufNewFile,InsertLeave * match ExtraWhitespace /\s\+$/
+if !exists("autocommands_loaded")
+    let autocommands_loaded = 1
+  " Have Vim jump to the last position when reopening a file
+  autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+      \| exe "normal g'\"" | endif
 
-autocmd FileType html,css,scss,sass setlocal sw=2 ts=2 et
-autocmd FileType javascript,javascript.jsx,htmljinja setlocal sw=2 ts=2 et
-autocmd FileType json setlocal sw=2 ts=2 et
-autocmd FileType jsonnet setlocal sw=2 ts=2 et
-autocmd FileType rst setlocal sw=2 ts=2 et
-autocmd FileType yaml setlocal sw=2 ts=2 et
-autocmd FileType vim setlocal sw=2 ts=2 et
+  "Avoid showing whitespace while in insert mode
+  autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+  autocmd BufEnter,BufRead,BufNewFile,InsertLeave * match ExtraWhitespace /\s\+$/
+
+  autocmd FileType html,css,scss,sass setlocal sw=2 ts=2 et
+  autocmd FileType javascript,javascript.jsx,htmljinja setlocal sw=2 ts=2 et
+  autocmd FileType json setlocal sw=2 ts=2 et
+  autocmd FileType jsonnet setlocal sw=2 ts=2 et
+  autocmd FileType rst setlocal sw=2 ts=2 et
+  autocmd FileType yaml setlocal sw=2 ts=2 et
+  autocmd FileType vim setlocal sw=2 ts=2 et
+endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => CoC
@@ -400,11 +410,6 @@ require('nvim-tree').setup({
     width = 35,
     side = 'right',
   },
-  renderer = {
-    icons = {
-      git_placement = 'after',
-    },
-  },
   filters = {
     git_ignored = false,
     custom = {
@@ -413,6 +418,9 @@ require('nvim-tree').setup({
       '\\.svn$', '\\.git$', '\\.swp$', '\\.pyc$', '\\.DS_Store',
       '\\.class$', '^__pycache__$', '^\\.ruff_cache$',
     },
+  },
+  git = {
+    enable = false,
   },
   live_filter = {
     always_show_folders = false,
