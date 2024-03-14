@@ -1,6 +1,10 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General Setup
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Recommended by nvim-tree to disable netrw
+let g:loaded_netrw = 1
+let g:loaded_netrwPlugin = 1
+
 " Install plugins
 call plug#begin(stdpath('config') . '/plugged')
 
@@ -13,13 +17,16 @@ Plug 'glench/vim-jinja2-syntax'
 Plug 'google/vim-jsonnet'
 Plug 'hashivim/vim-terraform'
 Plug 'LnL7/vim-nix'
+Plug 'machakann/vim-highlightedyank'
 Plug 'mxw/vim-jsx'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'nvim-lua/plenary.nvim'  " required for telescope
+Plug 'nvim-lualine/lualine.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' }
+Plug 'nvim-tree/nvim-web-devicons'  " required for lualine and nvim-tree
+Plug 'nvim-tree/nvim-tree.lua'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'pangloss/vim-javascript'
-Plug 'preservim/nerdtree', { 'on':  ['NERDTree', 'NERDTreeToggle'] }
 Plug 'rust-lang/rust.vim'
 Plug 'tomasiser/vim-code-dark'
 Plug 'sophacles/vim-bundle-mako'
@@ -138,14 +145,14 @@ set showmatch
 " Remove a lot of visual effects like scrollbar/menu/tabs from GUI
 set guioptions=a
 
-" Always hide the statusline
-set laststatus=0
-
 " Show as much of the last line as possible
 set display=lastline
 
 " Show a little more status about running command
 set showcmd
+
+" Increase the cmd height to avoid hit-enter prompts
+set cmdheight=2
 
 " Do not fold blocks by default
 set foldmethod=manual
@@ -214,6 +221,7 @@ autocmd FileType json setlocal sw=2 ts=2 et
 autocmd FileType jsonnet setlocal sw=2 ts=2 et
 autocmd FileType rst setlocal sw=2 ts=2 et
 autocmd FileType yaml setlocal sw=2 ts=2 et
+autocmd FileType vim setlocal sw=2 ts=2 et
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => CoC
@@ -224,9 +232,9 @@ autocmd FileType yaml setlocal sw=2 ts=2 et
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config
 inoremap <silent><expr> <TAB>
-      \ coc#pum#visible() ? coc#pum#next(1) :
-      \ CheckBackspace() ? "\<Tab>" :
-      \ coc#refresh()
+  \ coc#pum#visible() ? coc#pum#next(1) :
+  \ CheckBackspace() ? "\<Tab>" :
+  \ coc#refresh()
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
 " Make <CR> to accept selected completion item or notify coc.nvim to format
@@ -337,8 +345,8 @@ command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.org
 " Add (Neo)Vim's native statusline support
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-autocmd User CocStatusChange redrawstatus
+"set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+"autocmd User CocStatusChange,CocDiagnosticChange redrawstatus
 
 " Mappings for CoCList
 " Show all diagnostics
@@ -369,20 +377,50 @@ let g:csv_no_conceal = 1
 let g:jsx_ext_required = 0
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => NERDTree
+" => lualine
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let NERDTreeIgnore = [
-  \ '\.jpg$', '\.gif$', '\.png$', '\.hdr$', '\.gz$'
-  \ , '\.o$', '\.obj$', '\.so$', '\.a$', '\.dll$', '\.dylib$'
-  \ , '\.svn$', '\.git$', '\.swp$', '\.pyc$', '\.DS_Store'
-  \ , '\.class$', '__pycache__', '.ruff_cache' ]
-let NERDTreeWinPos = "right"
-let NERDTreeQuitOnOpen = 0
-let NERDTreeHighlightCursorline = 1
-let NERDTreeDirArrows = 0
-let NERDTreeMinimalUI = 1
-let NERDTreeShowHidden = 1
-nnoremap <leader>do :NERDTreeToggle<cr>
+lua << EOF
+require('lualine').setup({
+  extensions = {
+    'fugitive',
+    'nvim-tree',
+  },
+})
+EOF
+
+" Redraw when coc status changes
+autocmd User CocStatusChange,CocDiagnosticChange lua require('lualine').refresh()
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => nvim-tree
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+lua << EOF
+require('nvim-tree').setup({
+  view = {
+    width = 35,
+    side = 'right',
+  },
+  renderer = {
+    icons = {
+      git_placement = 'after',
+    },
+  },
+  filters = {
+    git_ignored = false,
+    custom = {
+      '\\.jpg$', '\\.gif$', '\\.png$', '\\.hdr$', '\\.gz$',
+      '\\.o$', '\\.obj$', '\\.so$', '\\.a$', '\\.dll$', '\\.dylib$',
+      '\\.svn$', '\\.git$', '\\.swp$', '\\.pyc$', '\\.DS_Store',
+      '\\.class$', '^__pycache__$', '^\\.ruff_cache$',
+    },
+  },
+  live_filter = {
+    always_show_folders = false,
+  },
+})
+EOF
+
+nnoremap <leader>do :NvimTreeToggle<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => rooter
