@@ -1,17 +1,6 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General Setup
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Polyglot config needs to be done very early
-" Disable various file types that we are handling with more modern plugins
-let g:polyglot_disabled = [
-  \ 'csv',
-  \ 'javascript',
-  \ 'jsonnet',
-  \ 'jsx',
-  \ 'rust',
-  \ 'sensible',
-  \ ]
-
 " Install plugins
 call plug#begin(stdpath('config') . '/plugged')
 
@@ -23,17 +12,14 @@ Plug 'glench/vim-jinja2-syntax'
 Plug 'godlygeek/tabular'
 Plug 'google/vim-jsonnet'
 Plug 'machakann/vim-highlightedyank'
-Plug 'mxw/vim-jsx'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'nvim-lua/plenary.nvim'  " required for telescope
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' }
-Plug 'nvim-tree/nvim-web-devicons'  " required for lualine and nvim-tree
+Plug 'nvim-tree/nvim-web-devicons'  " required for lualine, nvim-tree, and telescope
 Plug 'nvim-tree/nvim-tree.lua'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'pangloss/vim-javascript'
 Plug 'rust-lang/rust.vim'
-Plug 'sheerun/vim-polyglot'
 Plug 'stevearc/dressing.nvim'
 Plug 'tomasiser/vim-code-dark'
 Plug 'tpope/vim-fugitive'
@@ -71,8 +57,8 @@ set expandtab
 
 " Indent sanely
 set autoindent
-set copyindent
-set smarttab
+"set copyindent
+"set smarttab
 
 " Allow the cursor to go everywhere
 set virtualedit=insert,onemore,block
@@ -506,6 +492,7 @@ require'nvim-treesitter.configs'.setup {
     "html",
     "javascript",
     "json",
+    "jsonnet",
     "lua",
     "markdown",
     "python",
@@ -554,6 +541,15 @@ require'nvim-treesitter.configs'.setup {
     -- Using this option may slow down your editor, and you may see some duplicate highlights.
     -- Instead of true it can also be a list of languages
     additional_vim_regex_highlighting = false,
+  },
+
+  indent = {
+    enable = true,
+
+    -- Do not use treesitter for these languages
+    disable = {
+      "yaml",  -- seems to do much worse than the builtin
+    },
   },
 }
 EOF

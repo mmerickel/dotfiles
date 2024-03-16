@@ -15,4 +15,5 @@ augroup filetypedetect
     au! BufRead,BufNewFile .mrconfig setf ini
     au! BufRead,BufNewFile .yamllint setf yaml
     au! BufRead,BufNewFile .env,.env.* setf sh
+    au! BufRead,BufNewFile *.js,*.jsx set filetype=javascript.jsx
 augroup END
