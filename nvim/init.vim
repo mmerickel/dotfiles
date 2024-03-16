@@ -21,6 +21,7 @@ Plug 'nvim-tree/nvim-tree.lua'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-context'
 Plug 'rust-lang/rust.vim'
+Plug 'sophacles/vim-bundle-mako'
 Plug 'stevearc/dressing.nvim'
 Plug 'tomasiser/vim-code-dark'
 Plug 'tpope/vim-fugitive'
