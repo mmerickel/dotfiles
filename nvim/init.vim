@@ -19,6 +19,7 @@ Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' }
 Plug 'nvim-tree/nvim-web-devicons'  " required for lualine, nvim-tree, and telescope
 Plug 'nvim-tree/nvim-tree.lua'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter-context'
 Plug 'rust-lang/rust.vim'
 Plug 'stevearc/dressing.nvim'
 Plug 'tomasiser/vim-code-dark'
@@ -26,6 +27,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'windwp/nvim-projectconfig'
+Plug 'windwp/nvim-ts-autotag'
 
 call plug#end()
 
@@ -393,11 +395,6 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 let g:csv_no_conceal = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => JSX
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:jsx_ext_required = 0
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => lualine
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 lua << EOF
@@ -542,7 +539,9 @@ require'nvim-treesitter.configs'.setup {
     -- Instead of true it can also be a list of languages
     additional_vim_regex_highlighting = false,
   },
-
+  incremental_selection = {
+    enable = true,
+  },
   indent = {
     enable = true,
 
@@ -550,6 +549,10 @@ require'nvim-treesitter.configs'.setup {
     disable = {
       "yaml",  -- seems to do much worse than the builtin
     },
+  },
+  -- enable the windwp/nvim-ts-autotag plugin
+  autotag = {
+    enable = true,
   },
 }
 EOF
