@@ -1,5 +1,8 @@
 {
   "suggest.noselect": true,
+  "diagnostic-languageserver.filetypes": {
+    "sh": "shellcheck"
+  },
   "languageserver": {
     "terraform": {
       "command": "terraform-ls",
