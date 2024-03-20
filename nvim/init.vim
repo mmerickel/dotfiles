@@ -250,6 +250,23 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => CoC
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:coc_global_extensions = [
+  \ '@yaegassy/coc-ruff',
+  \ 'coc-css',
+  \ 'coc-diagnostic',
+  \ 'coc-docker',
+  \ 'coc-eslint',
+  \ 'coc-go',
+  \ 'coc-html',
+  \ 'coc-json',
+  \ 'coc-rust-analyzer',
+  \ 'coc-sql',
+  \ 'coc-toml',
+  \ 'coc-tsserver',
+  \ 'coc-xml',
+  \ 'coc-yaml',
+  \ ]
+
 " Use tab for trigger completion with characters ahead and navigate
 " NOTE: There's always complete item selected by default, you may want to enable
 " no select by `"suggest.noselect": true` in your configuration file
