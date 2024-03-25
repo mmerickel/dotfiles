@@ -245,6 +245,7 @@ if !exists("autocommands_loaded")
   autocmd FileType rst setlocal sw=2 ts=2 et
   autocmd FileType yaml setlocal sw=2 ts=2 et
   autocmd FileType vim setlocal sw=2 ts=2 et
+  autocmd FileType terraform,tfvars setlocal sw=2 ts=2 et
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
