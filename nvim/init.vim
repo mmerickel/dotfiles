@@ -574,6 +574,11 @@ require'nvim-treesitter.configs'.setup {
     enable = true,
   },
 }
+
+-- the Dockerfile.vim plugin defines the filetype=Dockerfile using uppercase
+-- https://github.com/nvim-treesitter/nvim-treesitter/issues/3515
+-- https://github.com/ekalinin/Dockerfile.vim/issues/67
+vim.treesitter.language.register("dockerfile", "Dockerfile")
 EOF
 
 if filereadable(stdpath('config') . '/local/init.vim')
