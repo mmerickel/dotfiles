@@ -27,6 +27,7 @@ Plug 'tomasiser/vim-code-dark'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
+Plug 'towolf/vim-helm'
 Plug 'windwp/nvim-projectconfig'
 Plug 'windwp/nvim-ts-autotag'
 
