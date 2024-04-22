@@ -240,11 +240,10 @@ if !exists("autocommands_loaded")
 
   " Override settings for various filetypes
   autocmd FileType html,css,scss,sass setlocal sw=2 ts=2 et
-  autocmd FileType javascript,javascript.jsx,htmljinja setlocal sw=2 ts=2 et
-  autocmd FileType json setlocal sw=2 ts=2 et
-  autocmd FileType jsonnet setlocal sw=2 ts=2 et
+  autocmd FileType javascript,javascript.jsx,htmljinja,jinja setlocal sw=2 ts=2 et
+  autocmd FileType json,jsonnet setlocal sw=2 ts=2 et
   autocmd FileType rst setlocal sw=2 ts=2 et
-  autocmd FileType yaml setlocal sw=2 ts=2 et
+  autocmd FileType yaml,helm setlocal sw=2 ts=2 et
   autocmd FileType vim setlocal sw=2 ts=2 et
   autocmd FileType terraform,tfvars setlocal sw=2 ts=2 et
 endif
