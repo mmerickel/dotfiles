@@ -21,6 +21,7 @@ Plug 'nvim-tree/nvim-tree.lua'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-context'
 Plug 'rust-lang/rust.vim'
+Plug 'shumphrey/fugitive-gitlab.vim'
 Plug 'sophacles/vim-bundle-mako'
 Plug 'stevearc/dressing.nvim'
 Plug 'tomasiser/vim-code-dark'
@@ -246,6 +247,8 @@ if !exists("autocommands_loaded")
   autocmd FileType yaml,helm setlocal sw=2 ts=2 et
   autocmd FileType vim setlocal sw=2 ts=2 et
   autocmd FileType terraform,tfvars setlocal sw=2 ts=2 et
+  autocmd FileType xml setlocal sw=2 ts=2 et
+  autocmd FileType python setlocal sw=4 ts=4 et
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
