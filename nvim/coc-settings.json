@@ -3,6 +3,7 @@
   "diagnostic-languageserver.filetypes": {
     "sh": "shellcheck"
   },
+  "ruff.nativeServer": true,
   "languageserver": {
     "terraform": {
       "command": "terraform-ls",
