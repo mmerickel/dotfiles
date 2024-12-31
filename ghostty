@@ -30,6 +30,9 @@ keybind = cmd+s>comma=move_tab:-1
 keybind = cmd+s>period=move_tab:1
 
 # quick tab switch
+keybind = cmd+alt+right=next_tab
+keybind = cmd+alt+left=previous_tab
+
 keybind = cmd+s>1=goto_tab:1
 keybind = cmd+s>2=goto_tab:2
 keybind = cmd+s>3=goto_tab:3
