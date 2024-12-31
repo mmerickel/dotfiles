@@ -15,6 +15,7 @@
     ff = only
 [push]
     default = simple
+    followTags = true
 [diff]
     renamelimit = 999999
     colorMoved = default

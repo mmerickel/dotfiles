@@ -1,10 +1,15 @@
 DOTFILES=$(shell pwd)
 LN=ln -snf
 
-.PHONY: all zsh tmux git nvim
-all: zsh tmux git nvim
+XDG_CONFIG_HOME=$(HOME)/.config
 
-zsh:
+.PHONY: all zsh tmux git nvim ghostty
+all: zsh tmux git nvim ghostty
+
+$(XDG_CONFIG_HOME):
+	mkdir -p $(XDG_CONFIG_HOME)
+
+zsh: $(XDG_CONFIG_HOME)
 	$(LN) $(DOTFILES)/zshenv $(HOME)/.zshenv
 	$(LN) $(DOTFILES)/zprofile $(HOME)/.zprofile
 	$(LN) $(DOTFILES)/zprezto $(HOME)/.zprezto
@@ -20,6 +25,10 @@ zsh:
 	$(LN) $(DOTFILES)/ripgreprc $(HOME)/.ripgreprc
 	$(LN) $(DOTFILES)/rgignore $(HOME)/.rgignore
 
+ghostty: $(XDG_CONFIG_HOME)
+	mkdir -p $(XDG_CONFIG_HOME)/ghostty
+	$(LN) $(DOTFILES)/ghostty $(XDG_CONFIG_HOME)/ghostty/config
+
 tmux:
 	$(LN) $(DOTFILES)/tmux.conf $(HOME)/.tmux.conf
 
@@ -28,6 +37,5 @@ git:
 	$(LN) $(DOTFILES)/gitignore $(HOME)/.gitignore
 	$(LN) $(DOTFILES)/git-templates $(HOME)/.git-templates
 
-nvim:
-	mkdir -p $(HOME)/.config
-	$(LN) $(DOTFILES)/nvim $(HOME)/.config/nvim
+nvim: $(XDG_CONFIG_HOME)
+	$(LN) $(DOTFILES)/nvim $(XDG_CONFIG_HOME)/nvim
