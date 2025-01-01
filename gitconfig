@@ -55,9 +55,10 @@
     cmd = /usr/local/bin/diffmerge --merge --result="$MERGED" "$LOCAL" "$BASE" "$REMOTE"
     trustExitCode = true
 [mergetool "sourcetree"]
-    cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh "$LOCAL" "$REMOTE" -ancestor "$BASE" -merge "$MERGED"
+    cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
     trustExitCode = true
 [difftool "diffmerge"]
     cmd = /usr/local/bin/diffmerge "$LOCAL" "$REMOTE"
 [difftool "sourcetree"]
-    cmd = opendiff "$LOCAL" "$REMOTE"
+    cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+    path = 
