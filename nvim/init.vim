@@ -35,8 +35,8 @@ Plug 'windwp/nvim-ts-autotag'
 
 call plug#end()
 
-command UpdatePlugins PlugUpdate | execute 'PlugSnapshot! ' .stdpath('config') . '/plug.snapshot'
-command SyncPlugins execute 'source ' .stdpath('config') . '/plug.snapshot'
+command UpdatePluginsSnapshot PlugUpdate | execute 'PlugSnapshot! ' .stdpath('config') . '/plug.snapshot'
+command SyncPluginsWithSnapshot execute 'source ' .stdpath('config') . '/plug.snapshot'
 
 " Turn backup off
 set nobackup
