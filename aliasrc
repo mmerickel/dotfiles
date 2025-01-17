@@ -232,3 +232,11 @@ speed_download:  %{speed_download} bytes/sec\n\
 ---------------\n\
          total:  %{time_total}s\n" "$@"
 }
+
+function urlencode {
+    python3 -c 'import urllib.parse, sys; print(urllib.parse.quote(sys.stdin.readline()), end="")'
+}
+
+function urldecode {
+    python3 -c 'import urllib.parse, sys; print(urllib.parse.unquote(sys.stdin.readline()), end="")'
+}
