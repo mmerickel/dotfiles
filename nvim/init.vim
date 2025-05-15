@@ -154,7 +154,7 @@ set vb t_vb=
 set showmatch
 
 " Remove a lot of visual effects like scrollbar/menu/tabs from GUI
-set guioptions=a
+" set guioptions=a
 
 " Show as much of the last line as possible
 set display=lastline
