@@ -240,3 +240,7 @@ function urlencode {
 function urldecode {
     python3 -c 'import urllib.parse, sys; print(urllib.parse.unquote(sys.stdin.readline()), end="")'
 }
+
+function jsonencode {
+    python3 -c 'import json, sys; print(json.dumps(sys.stdin.read()), end="")'
+}
