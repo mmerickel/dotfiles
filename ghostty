@@ -19,7 +19,8 @@ mouse-hide-while-typing = true
 
 copy-on-select = clipboard
 
-keybind = cmd+s>r=reload_config
+keybind = cmd+shift+j=write_screen_file:paste
+keybind = cmd+shift+,=reload_config
 keybind = cmd+s>x=close_surface
 keybind = cmd+s>n=new_window
 
