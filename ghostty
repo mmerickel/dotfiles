@@ -1,7 +1,7 @@
 # https://ghostty.org/docs/config
 
 # basic look and feel
-theme = tokyonight_night
+theme = TokyoNight Night
 # theme = "iTerm2 Pastel Dark Background"
 font-family = "RobotoMono Nerd Font"
 font-size = 14
