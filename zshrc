@@ -13,9 +13,14 @@ setopt CLOBBER
 # Completion Paths
 fpath=(
     $HOME/.zfunc
+    /opt/homebrew/share/zsh/site-functions
     /usr/local/share/zsh-completions
     $fpath
 )
+
+# load the pure prompt
+autoload -U promptinit; promptinit
+prompt pure
 
 # Aliases
 if [[ -a "${ZDOTDIR:-$HOME}/.aliasrc" ]]; then
