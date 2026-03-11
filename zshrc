@@ -2,11 +2,6 @@
 # Executes commands at the start of an interactive session.
 #
 
-# Source Prezto.
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-fi
-
 # do not require >! and >>!
 setopt CLOBBER
 
@@ -20,6 +15,8 @@ fpath=(
 
 # load the pure prompt
 autoload -U promptinit; promptinit
+PURE_GIT_PULL=0
+PURE_GIT_UNTRACKED_DIRTY=0
 prompt pure
 
 # Aliases
