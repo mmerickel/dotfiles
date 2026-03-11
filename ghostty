@@ -13,6 +13,10 @@ window-padding-balance = true
 
 shell-integration-features = no-cursor,sudo,no-title
 
+window-inherit-working-directory = false
+tab-inherit-working-directory = false
+split-inherit-working-directory = true
+
 window-save-state = always
 
 mouse-hide-while-typing = true
@@ -57,3 +61,4 @@ keybind = cmd+s>l=goto_split:right
 keybind = cmd+s>z=toggle_split_zoom
 
 keybind = cmd+s>e=equalize_splits
+keybind = shift+enter=text:\x1b\r
