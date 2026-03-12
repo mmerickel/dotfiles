@@ -2,9 +2,6 @@
 # Executes commands at the start of an interactive session.
 #
 
-# do not require >! and >>!
-setopt CLOBBER
-
 # Completion Paths
 fpath=(
     $HOME/.zfunc
@@ -12,6 +9,9 @@ fpath=(
     /usr/local/share/zsh-completions
     $fpath
 )
+
+# do not require >! and >>!
+setopt CLOBBER
 
 # load the pure prompt
 autoload -U promptinit; promptinit
