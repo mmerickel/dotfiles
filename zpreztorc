@@ -38,11 +38,9 @@ zstyle ':prezto:load' pmodule \
   'git' \
   'completion' \
   'syntax-highlighting' \
+  'prompt' \
   'osx' \
   'tmux'
-
-# place before osx
-# 'prompt' \
 
 #
 # Autosuggestions

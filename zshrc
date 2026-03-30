@@ -18,12 +18,6 @@ fpath=(
 # do not require >! and >>!
 setopt CLOBBER
 
-# load the pure prompt
-autoload -U promptinit; promptinit
-PURE_GIT_PULL=0
-PURE_GIT_UNTRACKED_DIRTY=0
-prompt pure
-
 # Aliases
 if [[ -a "${ZDOTDIR:-$HOME}/.aliasrc" ]]; then
     source "${ZDOTDIR:-$HOME}/.aliasrc"
