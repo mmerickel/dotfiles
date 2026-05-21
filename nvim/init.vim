@@ -502,90 +502,52 @@ EOF
 " => Treesitter
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 lua << EOF
-require'nvim-treesitter.configs'.setup {
-  -- A list of parser names, or "all"
-  ensure_installed = {
-    "bash",
-    "c",
-    "diff",
-    "dockerfile",
-    "gitcommit",
-    "go",
-    "hcl",
-    "html",
-    "javascript",
-    "json",
-    "jsonnet",
-    "lua",
-    "markdown",
-    "python",
-    "query",
-    "rust",
-    "toml",
-    "vim",
-    "vimdoc",
-  },
-
-  -- Install parsers synchronously (only applied to `ensure_installed`)
-  sync_install = false,
-
-  -- Automatically install missing parsers when entering buffer
-  -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-  auto_install = true,
-
-  -- List of parsers to ignore installing (for "all")
-  ignore_install = {
-    "rst",
-  },
-
-  ---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
-  -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
-
-  highlight = {
-    -- `false` will disable the whole extension
-    enable = true,
-
-    -- Do not use treesitter for these languages
-    disable = {
-      "rst", -- highlighting is just poor, doesn't highlight links etc
-    },
-
-    -- Disable tree-sitter when the file is too large
-    -- disable = function(lang, buf)
-    --     local max_filesize = 100 * 1024 -- 100 KB
-    --     local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-    --     if ok and stats and stats.size > max_filesize then
-    --         return true
-    --     end
-    -- end,
-
-    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-    -- Using this option may slow down your editor, and you may see some duplicate highlights.
-    -- Instead of true it can also be a list of languages
-    additional_vim_regex_highlighting = false,
-  },
-  incremental_selection = {
-    enable = true,
-  },
-  indent = {
-    enable = true,
-
-    -- Do not use treesitter for these languages
-    disable = {
-      "yaml",  -- seems to do much worse than the builtin
-    },
-  },
-  -- enable the windwp/nvim-ts-autotag plugin
-  autotag = {
-    enable = true,
-  },
-}
+-- Install parsers (asynchronous; no-op if already installed).
+require('nvim-treesitter').install({
+  "bash",
+  "c",
+  "diff",
+  "dockerfile",
+  "gitcommit",
+  "go",
+  "hcl",
+  "html",
+  "javascript",
+  "json",
+  "jsonnet",
+  "lua",
+  "markdown",
+  "python",
+  "query",
+  "rust",
+  "toml",
+  "vim",
+  "vimdoc",
+})
 
 -- the Dockerfile.vim plugin defines the filetype=Dockerfile using uppercase
 -- https://github.com/nvim-treesitter/nvim-treesitter/issues/3515
 -- https://github.com/ekalinin/Dockerfile.vim/issues/67
 vim.treesitter.language.register("dockerfile", "Dockerfile")
+
+-- Enable treesitter highlighting and indentation per-filetype.
+vim.api.nvim_create_autocmd('FileType', {
+  callback = function(args)
+    -- rst highlighting via treesitter is poor (no link highlighting, etc.)
+    if args.match == 'rst' then return end
+
+    -- Skip silently if no parser is available for this filetype.
+    if not pcall(vim.treesitter.start, args.buf) then return end
+
+    -- yaml: builtin indent is better than treesitter's
+    if args.match ~= 'yaml' then
+      vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+    end
+  end,
+})
+
+-- nvim-ts-autotag: its old `nvim-treesitter.configs` integration is deprecated.
+require('nvim-ts-autotag').setup()
 EOF
 
 if filereadable(stdpath('config') . '/local/init.vim')
