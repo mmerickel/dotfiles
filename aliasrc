@@ -232,3 +232,12 @@ function urldecode {
 function jsonencode {
     python3 -c 'import json, sys; print(json.dumps(sys.stdin.read()), end="")'
 }
+
+function strip_colors() {
+    # If an argument is provided, strip it; otherwise, read from stdin
+    if [ $# -gt 0 ]; then
+        echo "$*" | sed -E 's/\x1b\[[0-9;]*[mK]//g'
+    else
+        sed -E 's/\x1b\[[0-9;]*[mK]//g'
+    fi
+}
