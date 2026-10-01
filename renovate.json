@@ -2,5 +2,68 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended"
+  ],
+  "git-submodules": {
+    "enabled": true
+  },
+  "customManagers": [
+    {
+      "description": "vim-plug commit pins in nvim/plug.snapshot; each plugin's repo is set below",
+      "customType": "regex",
+      "managerFilePatterns": ["/^nvim/plug\\.snapshot$/"],
+      "matchStrings": [
+        "g:plugs\\['(?<depName>[^']+)'\\]\\.commit = '(?<currentDigest>[a-f0-9]{40})'"
+      ],
+      "currentValueTemplate": "{{#if (equals depName 'coc.nvim')}}release{{/if}}{{#if (equals depName 'telescope.nvim')}}0.1.x{{/if}}",
+      "datasourceTemplate": "git-refs",
+      "depTypeTemplate": "nvim-plugin"
+    }
+  ],
+  "packageRules": [
+    {
+      "description": "All nvim plugins in one monthly PR",
+      "matchDepTypes": ["nvim-plugin"],
+      "groupName": "nvim plugins",
+      "schedule": ["* 0-3 1 * *"]
+    },
+    { "matchDepTypes": ["nvim-plugin"], "matchDepNames": ["Dockerfile.vim"], "sourceUrl": "https://github.com/ekalinin/Dockerfile.vim" },
+    { "matchDepTypes": ["nvim-plugin"], "matchDepNames": ["coc.nvim"], "sourceUrl": "https://github.com/neoclide/coc.nvim" },
+    { "matchDepTypes": ["nvim-plugin"], "matchDepNames": ["csv.vim"], "sourceUrl": "https://github.com/chrisbra/csv.vim" },
+    { "matchDepTypes": ["nvim-plugin"], "matchDepNames": ["dressing.nvim"], "sourceUrl": "https://github.com/stevearc/dressing.nvim" },
+    { "matchDepTypes": ["nvim-plugin"], "matchDepNames": ["fugitive-gitlab.vim"], "sourceUrl": "https://github.com/shumphrey/fugitive-gitlab.vim" },
+    { "matchDepTypes": ["nvim-plugin"], "matchDepNames": ["lualine.nvim"], "sourceUrl": "https://github.com/nvim-lualine/lualine.nvim" },
+    { "matchDepTypes": ["nvim-plugin"], "matchDepNames": ["nvim-projectconfig"], "sourceUrl": "https://github.com/windwp/nvim-projectconfig" },
+    { "matchDepTypes": ["nvim-plugin"], "matchDepNames": ["nvim-tree.lua"], "sourceUrl": "https://github.com/nvim-tree/nvim-tree.lua" },
+    { "matchDepTypes": ["nvim-plugin"], "matchDepNames": ["nvim-treesitter"], "sourceUrl": "https://github.com/nvim-treesitter/nvim-treesitter" },
+    { "matchDepTypes": ["nvim-plugin"], "matchDepNames": ["nvim-treesitter-context"], "sourceUrl": "https://github.com/nvim-treesitter/nvim-treesitter-context" },
+    { "matchDepTypes": ["nvim-plugin"], "matchDepNames": ["nvim-ts-autotag"], "sourceUrl": "https://github.com/windwp/nvim-ts-autotag" },
+    { "matchDepTypes": ["nvim-plugin"], "matchDepNames": ["nvim-web-devicons"], "sourceUrl": "https://github.com/nvim-tree/nvim-web-devicons" },
+    { "matchDepTypes": ["nvim-plugin"], "matchDepNames": ["plenary.nvim"], "sourceUrl": "https://github.com/nvim-lua/plenary.nvim" },
+    { "matchDepTypes": ["nvim-plugin"], "matchDepNames": ["rust.vim"], "sourceUrl": "https://github.com/rust-lang/rust.vim" },
+    { "matchDepTypes": ["nvim-plugin"], "matchDepNames": ["tabular"], "sourceUrl": "https://github.com/godlygeek/tabular" },
+    { "matchDepTypes": ["nvim-plugin"], "matchDepNames": ["telescope.nvim"], "sourceUrl": "https://github.com/nvim-telescope/telescope.nvim" },
+    { "matchDepTypes": ["nvim-plugin"], "matchDepNames": ["tokyonight.nvim"], "sourceUrl": "https://github.com/folke/tokyonight.nvim" },
+    { "matchDepTypes": ["nvim-plugin"], "matchDepNames": ["vim-bundle-mako"], "sourceUrl": "https://github.com/sophacles/vim-bundle-mako" },
+    { "matchDepTypes": ["nvim-plugin"], "matchDepNames": ["vim-code-dark"], "sourceUrl": "https://github.com/tomasiser/vim-code-dark" },
+    { "matchDepTypes": ["nvim-plugin"], "matchDepNames": ["vim-fugitive"], "sourceUrl": "https://github.com/tpope/vim-fugitive" },
+    { "matchDepTypes": ["nvim-plugin"], "matchDepNames": ["vim-helm"], "sourceUrl": "https://github.com/towolf/vim-helm" },
+    { "matchDepTypes": ["nvim-plugin"], "matchDepNames": ["vim-highlightedyank"], "sourceUrl": "https://github.com/machakann/vim-highlightedyank" },
+    { "matchDepTypes": ["nvim-plugin"], "matchDepNames": ["vim-jinja2-syntax"], "sourceUrl": "https://github.com/glench/vim-jinja2-syntax" },
+    { "matchDepTypes": ["nvim-plugin"], "matchDepNames": ["vim-jsonnet"], "sourceUrl": "https://github.com/google/vim-jsonnet" },
+    { "matchDepTypes": ["nvim-plugin"], "matchDepNames": ["vim-repeat"], "sourceUrl": "https://github.com/tpope/vim-repeat" },
+    { "matchDepTypes": ["nvim-plugin"], "matchDepNames": ["vim-rhubarb"], "sourceUrl": "https://github.com/tpope/vim-rhubarb" },
+    { "matchDepTypes": ["nvim-plugin"], "matchDepNames": ["vim-rooter"], "sourceUrl": "https://github.com/airblade/vim-rooter" },
+    { "matchDepTypes": ["nvim-plugin"], "matchDepNames": ["vim-surround"], "sourceUrl": "https://github.com/tpope/vim-surround" },
+    {
+      "description": "Fetch each plugin from the repo named above",
+      "matchDepTypes": ["nvim-plugin"],
+      "overridePackageName": "{{sourceUrl}}"
+    },
+    {
+      "description": "Plugins follow their branch by commit; the branch lives in init.vim, so never bump it",
+      "matchDepTypes": ["nvim-plugin"],
+      "matchUpdateTypes": ["major", "minor", "patch"],
+      "enabled": false
+    }
   ]
 }
