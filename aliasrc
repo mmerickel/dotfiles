@@ -26,6 +26,8 @@ if [[ "$OSTYPE" == darwin* ]]; then
     export LSCOLORS=gxfxcxdxbxegedabagacad
 fi
 
+alias meld='/Applications/Meld.app/Contents/MacOS/Meld'
+
 aws-profile() {
     read -r -d '' SCRIPT <<'EOF'
 import argparse
