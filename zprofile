@@ -7,20 +7,6 @@ if [[ "$OSTYPE" == darwin* ]]; then
   export BROWSER='open'
 fi
 
-# Editors
-VI='vi'
-if type nvim > /dev/null; then
-    VI='nvim'
-elif type /opt/homebrew/bin/nvim > /dev/null; then
-    VI='/opt/homebrew/bin/nvim'
-elif type vim > /dev/null; then
-    VI='vim'
-fi
-export VI
-export EDITOR=$VI
-export VISUAL=$VI
-export PAGER='less'
-
 # map kubeconfig to KUBECONFIG
 typeset -T KUBECONFIG kubeconfig :
 export KUBECONFIG
@@ -34,14 +20,35 @@ typeset -gU cdpath fpath mailpath path
 #   $cdpath
 # )
 
+# Homebrew, if installed
+for brew in /opt/homebrew/bin/brew /home/linuxbrew/.linuxbrew/bin/brew /usr/local/bin/brew; do
+    if [[ -x "$brew" ]]; then
+        eval "$("$brew" shellenv)"
+        break
+    fi
+done
+unset brew
+
 # Set the list of directories that Zsh searches for programs.
 path=(
     "$HOME/bin"
     "$HOME/.local/bin"
     "$HOME/.dotfiles/bin"
-    /usr/local/{bin,sbin}
     $path
+    /usr/local/{bin,sbin}
 )
+
+# Editors
+VI='vi'
+if type nvim > /dev/null; then
+    VI='nvim'
+elif type vim > /dev/null; then
+    VI='vim'
+fi
+export VI
+export EDITOR=$VI
+export VISUAL=$VI
+export PAGER='less'
 
 #
 # Set the default Less options.

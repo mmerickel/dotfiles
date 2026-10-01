@@ -3,13 +3,16 @@ LN=ln -snf
 
 XDG_CONFIG_HOME=$(HOME)/.config
 
-.PHONY: all zsh tmux git nvim ghostty
+.PHONY: all submodules zsh tmux git nvim ghostty
 all: zsh tmux git nvim ghostty
 
 $(XDG_CONFIG_HOME):
 	mkdir -p $(XDG_CONFIG_HOME)
 
-zsh: $(XDG_CONFIG_HOME)
+submodules:
+	git -C $(DOTFILES) submodule update --init --recursive
+
+zsh: submodules $(XDG_CONFIG_HOME)
 	$(LN) $(DOTFILES)/zshenv $(HOME)/.zshenv
 	$(LN) $(DOTFILES)/zprofile $(HOME)/.zprofile
 	$(LN) $(DOTFILES)/zprezto $(HOME)/.zprezto

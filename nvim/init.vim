@@ -6,12 +6,9 @@ call plug#begin(stdpath('config') . '/plugged')
 
 Plug 'airblade/vim-rooter'
 Plug 'chrisbra/csv.vim'
-Plug 'ekalinin/Dockerfile.vim'
 Plug 'folke/tokyonight.nvim'
 Plug 'glench/vim-jinja2-syntax'
 Plug 'godlygeek/tabular'
-Plug 'google/vim-jsonnet'
-Plug 'machakann/vim-highlightedyank'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'nvim-lua/plenary.nvim'  " required for telescope
 Plug 'nvim-lualine/lualine.nvim'
@@ -23,8 +20,6 @@ Plug 'nvim-treesitter/nvim-treesitter-context'
 Plug 'rust-lang/rust.vim'
 Plug 'shumphrey/fugitive-gitlab.vim'
 Plug 'sophacles/vim-bundle-mako'
-Plug 'stevearc/dressing.nvim'
-Plug 'tomasiser/vim-code-dark'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rhubarb'
@@ -243,9 +238,12 @@ if !exists("autocommands_loaded")
   autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
   autocmd BufEnter,BufRead,BufNewFile,InsertLeave * match ExtraWhitespace /\s\+$/
 
+  " Briefly highlight yanked text
+  autocmd TextYankPost * silent! lua vim.hl.on_yank({ timeout = 1000 })
+
   " Override settings for various filetypes
   autocmd FileType html,css,scss,sass setlocal sw=2 ts=2 et
-  autocmd FileType javascript,javascript.jsx,htmljinja,jinja setlocal sw=2 ts=2 et
+  autocmd FileType javascript,javascriptreact,htmljinja,jinja setlocal sw=2 ts=2 et
   autocmd FileType json,jsonnet setlocal sw=2 ts=2 et
   autocmd FileType rst setlocal sw=2 ts=2 et
   autocmd FileType yaml,helm setlocal sw=2 ts=2 et
@@ -524,11 +522,6 @@ require('nvim-treesitter').install({
   "vim",
   "vimdoc",
 })
-
--- the Dockerfile.vim plugin defines the filetype=Dockerfile using uppercase
--- https://github.com/nvim-treesitter/nvim-treesitter/issues/3515
--- https://github.com/ekalinin/Dockerfile.vim/issues/67
-vim.treesitter.language.register("dockerfile", "Dockerfile")
 
 -- Enable treesitter highlighting and indentation per-filetype.
 vim.api.nvim_create_autocmd('FileType', {

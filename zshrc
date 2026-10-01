@@ -2,18 +2,18 @@
 # Executes commands at the start of an interactive session.
 #
 
-# Source Prezto.
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-fi
-
-# Completion Paths
+# Completion Paths (before Prezto, which runs compinit)
 fpath=(
     $HOME/.zfunc
     /opt/homebrew/share/zsh/site-functions
     /usr/local/share/zsh-completions
     $fpath
 )
+
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
 
 # do not require >! and >>!
 setopt CLOBBER

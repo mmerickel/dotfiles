@@ -42,7 +42,6 @@
     co = checkout
     br = branch
     f = fetch --verbose --prune
-    hub = "!hub"
     lab = "!glab"
     lol = log --pretty=oneline --abbrev-commit --graph --decorate
     plog = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
@@ -51,14 +50,3 @@
     pushf = push --force-with-lease
     conflicts = diff --name-only --diff-filter=U
     gh-pr = "!f(){ git fetch origin pull/$1/head:pr/$1; git checkout pr/$1; }; f"
-[mergetool "diffmerge"]
-    cmd = /usr/local/bin/diffmerge --merge --result="$MERGED" "$LOCAL" "$BASE" "$REMOTE"
-    trustExitCode = true
-[mergetool "sourcetree"]
-    cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-    trustExitCode = true
-[difftool "diffmerge"]
-    cmd = /usr/local/bin/diffmerge "$LOCAL" "$REMOTE"
-[difftool "sourcetree"]
-    cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-    path = 
