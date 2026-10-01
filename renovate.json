@@ -14,7 +14,7 @@
       "matchStrings": [
         "g:plugs\\['(?<depName>[^']+)'\\]\\.commit = '(?<currentDigest>[a-f0-9]{40})'"
       ],
-      "currentValueTemplate": "{{#if (equals depName 'coc.nvim')}}release{{/if}}{{#if (equals depName 'telescope.nvim')}}0.1.x{{/if}}",
+      "currentValueTemplate": "{{#if (equals depName 'coc.nvim')}}release{{/if}}",
       "datasourceTemplate": "git-refs",
       "depTypeTemplate": "nvim-plugin"
     }
