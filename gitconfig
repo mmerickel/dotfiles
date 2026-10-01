@@ -20,7 +20,7 @@
     renamelimit = 999999
     colorMoved = default
 [merge]
-    conflictstyle = diff3
+    conflictstyle = zdiff3
     renamelimit = 999999
 [color]
     diff = auto
@@ -50,3 +50,5 @@
     pushf = push --force-with-lease
     conflicts = diff --name-only --diff-filter=U
     gh-pr = "!f(){ git fetch origin pull/$1/head:pr/$1; git checkout pr/$1; }; f"
+[user]
+	useConfigOnly = true
