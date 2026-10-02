@@ -6,12 +6,14 @@ call plug#begin(stdpath('config') . '/plugged')
 
 Plug 'airblade/vim-rooter'
 Plug 'chrisbra/csv.vim'
+Plug 'folke/snacks.nvim'
 Plug 'folke/tokyonight.nvim'
 Plug 'glench/vim-jinja2-syntax'
 Plug 'godlygeek/tabular'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'nvim-lua/plenary.nvim'  " required for telescope
 Plug 'nvim-lualine/lualine.nvim'
+Plug 'nvim-telescope/telescope-ui-select.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-tree/nvim-web-devicons'  " required for lualine, nvim-tree, and telescope
 Plug 'nvim-tree/nvim-tree.lua'
@@ -493,6 +495,17 @@ telescope.setup({
       },
     },
   },
+})
+
+telescope.load_extension("ui-select")
+EOF
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Snacks
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+lua << EOF
+require("snacks").setup({
+  input = { enabled = true },
 })
 EOF
 
