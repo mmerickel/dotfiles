@@ -42,13 +42,16 @@ from textwrap import dedent
 # by the bash script looking for a profile name on stdout
 out = lambda *a, **kw: print(*a, **kw, file=sys.stderr)
 
-def parse_profiles():
-    config_profile_prefix = 'profile '
-    config_path = os.path.expanduser('~/.aws/config')
+config_profile_prefix = 'profile '
+
+def load_config():
+    config_path = os.getenv('AWS_CONFIG_FILE', os.path.expanduser('~/.aws/config'))
 
     config = RawConfigParser()
     config.read(config_path)
+    return config
 
+def parse_profiles(config):
     profiles = []
     for section in config.sections():
         if section.startswith(config_profile_prefix):
@@ -56,6 +59,12 @@ def parse_profiles():
             profiles.append(profile)
 
     return profiles
+
+def supports_aws_login(config, profile):
+    # profiles created by `aws login` are tied to a console session
+    # via the login_session key
+    section = 'default' if profile == 'default' else config_profile_prefix + profile
+    return config.has_option(section, 'login_session')
 
 def select_profile_manual(profiles, current_profile=None):
     out('--- Choose AWS profile ---')
@@ -140,9 +149,11 @@ def main():
         ))
         return 0
 
+    config = load_config()
+
     profile = args.profile
     if not profile:
-        profiles = parse_profiles()
+        profiles = parse_profiles(config)
         if not profiles:
             out('No profiles found in ~/.aws/config')
             return 1
@@ -160,7 +171,20 @@ def main():
     p = subprocess.run(args, capture_output=True, text=True, env=env)
 
     stderr = p.stderr.lower()
-    if p.returncode != 0 and (
+    # missing, expired and password-changed login sessions all point the
+    # user back at `aws login`, other login errors won't be fixed by it
+    if (
+        p.returncode != 0
+        and supports_aws_login(config, profile)
+        and "'aws login'" in stderr
+    ):
+        out('Session is invalid, triggering an AWS login ...')
+        args = ['aws', 'login', '--remote']
+        p = subprocess.run(args, stdout=sys.stderr, env=env, text=True)
+        if p.returncode != 0:
+            raise SystemExit(1)
+
+    elif p.returncode != 0 and (
         'error loading sso token' in stderr
         or 'error when retrieving token' in stderr
         or 'sso session associated with this profile has expired' in stderr
