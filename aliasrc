@@ -44,7 +44,7 @@ out = lambda *a, **kw: print(*a, **kw, file=sys.stderr)
 
 def parse_profiles():
     config_profile_prefix = 'profile '
-    config_path = os.path.expanduser('~/.aws/config')
+    config_path = os.getenv('AWS_CONFIG_FILE', os.path.expanduser('~/.aws/config'))
 
     config = RawConfigParser()
     config.read(config_path)
@@ -110,6 +110,10 @@ def parse_args():
     parser.add_argument('-h', '--help', action='store_true')
     parser.add_argument('-c', '--current', action='store_true')
     parser.add_argument('--unset', action='store_true')
+    parser.add_argument(
+        '--remote', action='store_true',
+        help='login without opening a local browser, for use over ssh',
+    )
     parser.add_argument('profile', nargs='?')
     args = parser.parse_args(args)
 
@@ -155,19 +159,32 @@ def main():
         out(f'No profile selected.')
         return 1
 
-    args = ['aws', 'configure', 'list']
+    cmd = ['aws', 'configure', 'list']
     env = {**dict(os.environ), 'AWS_PROFILE': profile}
-    p = subprocess.run(args, capture_output=True, text=True, env=env)
+    p = subprocess.run(cmd, capture_output=True, text=True, env=env)
 
     stderr = p.stderr.lower()
-    if p.returncode != 0 and (
+    # missing, expired and password-changed login sessions all point the
+    # user back at `aws login`, other login errors won't be fixed by it
+    if p.returncode != 0 and "'aws login'" in stderr:
+        out('Session is invalid, triggering an AWS login ...')
+        cmd = ['aws', 'login']
+        if args.remote:
+            cmd.append('--remote')
+        p = subprocess.run(cmd, stdout=sys.stderr, env=env, text=True)
+        if p.returncode != 0:
+            raise SystemExit(1)
+
+    elif p.returncode != 0 and (
         'error loading sso token' in stderr
         or 'error when retrieving token' in stderr
         or 'sso session associated with this profile has expired' in stderr
     ):
         out('Session is invalid, triggering an SSO login ...')
-        args = ['aws', 'sso', 'login', '--no-browser']
-        p = subprocess.run(args, stdout=sys.stderr, env=env, text=True)
+        cmd = ['aws', 'sso', 'login']
+        if args.remote:
+            cmd.append('--no-browser')
+        p = subprocess.run(cmd, stdout=sys.stderr, env=env, text=True)
         if p.returncode != 0:
             raise SystemExit(1)
 
